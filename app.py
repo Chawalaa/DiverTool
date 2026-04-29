@@ -513,7 +513,7 @@ elif page == "Conversation Builder":
 
     st.markdown("### Copy-ready note")
     st.code(
-        f"Audience: {audience}
+        f"""Audience: {audience}
 Situation: {builder_situation}
 School level: {level}
 
@@ -521,7 +521,7 @@ Try saying: {response['main'][level]}
 
 Softer version: {response['softer'][level]}
 
-Follow-up: {guidance['follow_up']}",
+Follow-up: {guidance['follow_up']}""",
         language="text",
     )
 
