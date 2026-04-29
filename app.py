@@ -228,6 +228,153 @@ SCENARIOS = {
     },
 }
 
+AUDIENCE_GUIDANCE = {
+    "Student": {
+        "tone": "Private, gentle, and choice-based.",
+        "principle": "Protect the learner from embarrassment and avoid asking them to explain everything immediately.",
+        "follow_up": "Would it help if we tried another way for you to participate?",
+    },
+    "Parent / Guardian": {
+        "tone": "Respectful, observational, and collaborative.",
+        "principle": "Begin with what has been noticed in class, not with labels, conclusions, or blame.",
+        "follow_up": "Have you noticed anything similar, or are there ways your child feels more comfortable learning at home?",
+    },
+    "Colleague": {
+        "tone": "Reflective, non-accusatory, and evidence-based.",
+        "principle": "Discuss patterns and support possibilities without attaching a fixed negative identity to the learner.",
+        "follow_up": "Have you noticed when this happens most, and what seems to help?",
+    },
+}
+
+CONVERSATION_BUILDER = {
+    "Student": {
+        "Student is silent during group work": {
+            "avoid": "Why are you not talking? You need to join the group.",
+            "main": GROUP_WORK_SCRIPTS,
+            "softer": {
+                "General": "You do not have to speak immediately. You can listen first, write your idea, or share later.",
+                "Elementary School": "You can point, draw, or show me your idea first. Talking can come later.",
+                "Junior High School": "You can prepare your idea first. You do not have to speak before you are ready.",
+                "High School": "You can contribute in another way first, such as writing your idea or choosing a specific role.",
+            },
+        },
+        "Student refuses to present": {
+            "avoid": "Everyone else is presenting, so you have to do it too.",
+            "main": PARTICIPATION_SCRIPTS,
+            "softer": {
+                "General": "We can think about another way for you to show your work.",
+                "Elementary School": "You can show me first, then we can decide if you want to show others.",
+                "Junior High School": "You can share with a partner first, or submit your idea in writing.",
+                "High School": "You can demonstrate your understanding through a different format if presenting today feels too difficult.",
+            },
+        },
+        "Student seems overwhelmed": {
+            "avoid": "Calm down. This is not difficult.",
+            "main": OVERWHELM_SCRIPTS,
+            "softer": {
+                "General": "Let us slow down and choose one small next step.",
+                "Elementary School": "Let us do only the first part together.",
+                "Junior High School": "You can take a short pause. Then we can decide the next step.",
+                "High School": "Let us identify which part is creating the most pressure and adjust the order.",
+            },
+        },
+    },
+    "Parent / Guardian": {
+        "Student is silent during group work": {
+            "avoid": "Your child does not cooperate in group activities.",
+            "main": {
+                "General": "I have noticed that group activities may sometimes be difficult for your child to join. I would like to understand what kind of participation feels more comfortable for them.",
+                "Elementary School": "I have noticed that your child sometimes finds it difficult to join group activities. Are there ways they usually feel comfortable sharing ideas?",
+                "Junior High School": "I have noticed that your child may become quiet when group participation is expected. I would like us to think together about supportive ways for them to join.",
+                "High School": "I have noticed that your child may prefer quieter or more prepared forms of participation. I would like to discuss what support might help without adding pressure.",
+            },
+            "softer": {
+                "General": "This is not about blaming them. I want to understand what helps them participate safely.",
+                "Elementary School": "I want to support them gently, not pressure them.",
+                "Junior High School": "I want to be careful not to make them feel singled out.",
+                "High School": "I want to respect their dignity while still supporting participation.",
+            },
+        },
+        "Student refuses to present": {
+            "avoid": "Your child refuses to do what other students can do.",
+            "main": {
+                "General": "I have noticed that presentation tasks may feel difficult for your child. I would like to explore ways they can still show their understanding.",
+                "Elementary School": "I have noticed that presenting in front of others may feel difficult. Could we think about smaller steps that may help?",
+                "Junior High School": "I have noticed that presenting may create pressure, especially in front of peers. I would like to support participation carefully.",
+                "High School": "I have noticed that public presentation may not always be the best way for your child to demonstrate understanding. I would like to discuss possible alternatives.",
+            },
+            "softer": {
+                "General": "The goal is not to avoid learning, but to find a way for them to show what they know.",
+                "Elementary School": "We can start with a smaller and safer step.",
+                "Junior High School": "We can reduce embarrassment while still encouraging growth.",
+                "High School": "We can keep expectations high while allowing a different communication format.",
+            },
+        },
+        "Student seems overwhelmed": {
+            "avoid": "Your child cannot handle normal classwork.",
+            "main": {
+                "General": "I have noticed that some tasks may feel overwhelming at times. I would like to understand what helps your child manage learning steps.",
+                "Elementary School": "I have noticed that your child sometimes needs tasks broken into smaller steps. What usually helps at home?",
+                "Junior High School": "I have noticed that your child may become quiet or withdrawn when a task feels too much. I would like to think about supportive strategies.",
+                "High School": "I have noticed some signs of pressure during complex tasks. I would like to discuss how to support organization and confidence.",
+            },
+            "softer": {
+                "General": "This does not mean they cannot learn. It may mean the support structure needs adjustment.",
+                "Elementary School": "Small steps may help them feel more confident.",
+                "Junior High School": "We can support them without making the difficulty public.",
+                "High School": "We can support independence by adjusting how tasks are approached.",
+            },
+        },
+    },
+    "Colleague": {
+        "Student is silent during group work": {
+            "avoid": "That student is always difficult in groups.",
+            "main": {
+                "General": "I wonder if the student may need a clearer or quieter way to participate in group work.",
+                "Elementary School": "Maybe the student needs a concrete role in the group before they can join comfortably.",
+                "Junior High School": "I wonder if peer attention is making group participation harder for this student.",
+                "High School": "I wonder if the student participates better when there is preparation time or a defined role.",
+            },
+            "softer": {
+                "General": "Maybe we can compare when the student participates more comfortably.",
+                "Elementary School": "It might help to observe what happens before the student withdraws.",
+                "Junior High School": "It may be useful to think about peer dynamics, not only motivation.",
+                "High School": "The pattern may be connected to format, not ability.",
+            },
+        },
+        "Student refuses to present": {
+            "avoid": "They are just refusing to try.",
+            "main": {
+                "General": "I wonder if presentation pressure is hiding what the student actually understands.",
+                "Elementary School": "Maybe we can let the student show the work in a smaller step first.",
+                "Junior High School": "Peer visibility may be a major part of the difficulty here.",
+                "High School": "Maybe the issue is not understanding, but the format of public performance.",
+            },
+            "softer": {
+                "General": "Could we separate the learning goal from the presentation format?",
+                "Elementary School": "A small success first may help build confidence.",
+                "Junior High School": "A lower-pressure format may still meet the learning goal.",
+                "High School": "Alternative demonstration could preserve rigor while reducing unnecessary pressure.",
+            },
+        },
+        "Student seems overwhelmed": {
+            "avoid": "This student cannot keep up.",
+            "main": {
+                "General": "I wonder if the task structure is creating too many demands at once.",
+                "Elementary School": "Maybe the student needs the task broken into smaller visible steps.",
+                "Junior High School": "The student may need a way to ask for help without feeling exposed.",
+                "High School": "The student may benefit from support with sequencing, timing, or task prioritization.",
+            },
+            "softer": {
+                "General": "Maybe adjusting the steps would help us see what they can actually do.",
+                "Elementary School": "A visual step-by-step structure may help.",
+                "Junior High School": "Private support may work better than public correction.",
+                "High School": "Support can be framed as learning strategy, not weakness.",
+            },
+        },
+    },
+}
+
 # -----------------------------
 # Sidebar Navigation
 # -----------------------------
@@ -241,6 +388,7 @@ page = st.sidebar.radio(
         "Home",
         "Noticing Learners",
         "Conversation Support",
+        "Conversation Builder",
         "Scripts by Situation",
         "Visual Metaphors",
         "Quick Classroom Tools",
@@ -331,6 +479,51 @@ elif page == "Conversation Support":
 
     st.markdown("### Communication principle")
     st.info("The goal is not to make the learner explain everything. The goal is to make support easier to access without shame.")
+
+elif page == "Conversation Builder":
+    st.title("Conversation Builder")
+    st.write("Build a careful conversation response based on who you are speaking with, the situation, and the school level.")
+
+    col1, col2, col3 = st.columns(3)
+    with col1:
+        audience = st.selectbox("Who are you speaking with?", list(AUDIENCE_GUIDANCE.keys()))
+    with col2:
+        builder_situation = st.selectbox("What is the situation?", list(CONVERSATION_BUILDER[audience].keys()))
+    with col3:
+        level = st.selectbox("Select school level", LEVELS)
+
+    guidance = AUDIENCE_GUIDANCE[audience]
+    response = CONVERSATION_BUILDER[audience][builder_situation]
+
+    st.markdown("### Conversation guidance")
+    col1, col2 = st.columns(2)
+    with col1:
+        card("Recommended tone", guidance["tone"], "soft-blue")
+    with col2:
+        card("Main principle", guidance["principle"], "mint")
+
+    st.markdown("### Suggested response")
+    phrase_block("Avoid saying", response["avoid"], "avoid")
+    phrase_block("Try saying", response["main"][level], "try")
+    phrase_block("Softer version", response["softer"][level], "phrase")
+    phrase_block("Follow-up question", guidance["follow_up"], "phrase")
+
+    st.markdown("### Before you speak, ask yourself")
+    st.warning("Will this conversation protect the learner’s dignity, avoid premature labeling, and make support easier to access?")
+
+    st.markdown("### Copy-ready note")
+    st.code(
+        f"Audience: {audience}
+Situation: {builder_situation}
+School level: {level}
+
+Try saying: {response['main'][level]}
+
+Softer version: {response['softer'][level]}
+
+Follow-up: {guidance['follow_up']}",
+        language="text",
+    )
 
 elif page == "Scripts by Situation":
     st.title("Scripts by Situation")
