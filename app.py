@@ -220,17 +220,6 @@ TEXT = {
 }
 
 
-def get_language():
-    st.sidebar.markdown("### Language / 言語")
-    lang_choice = st.sidebar.selectbox(
-        "Choose language",
-        ["English", "日本語"],
-        index=0,
-    )
-    st.sidebar.markdown("---")
-    return "ja" if lang_choice == "日本語" else "en"
-
-
 # -----------------------------
 # Content Data
 # -----------------------------
@@ -370,9 +359,21 @@ CONVERSATION_BUILDER = {
 # Sidebar Navigation
 # -----------------------------
 
-LANG = get_language()
+# -----------------------------
+# Sidebar Language Toggle
+# -----------------------------
+
+st.sidebar.markdown("### Language / 言語")
+LANGUAGE_CHOICE = st.sidebar.selectbox(
+    "Choose language / 言語を選択",
+    ["English", "日本語"],
+    index=0,
+    key="language_toggle",
+)
+LANG = "ja" if LANGUAGE_CHOICE == "日本語" else "en"
 t = TEXT[LANG]
 
+st.sidebar.markdown("---")
 st.sidebar.title(t["sidebar_title"])
 st.sidebar.caption(t["sidebar_caption"])
 
