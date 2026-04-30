@@ -6,6 +6,83 @@ from datetime import datetime
 # Streamlit App Foundation
 # =====================================================
 
+# -----------------------------
+# Language Support
+# -----------------------------
+
+TEXT = {
+    "en": {
+        "sidebar_title": "Teacher Communication Toolkit",
+        "sidebar_caption": "Culturally responsive support for classroom conversations",
+        "menu": "Menu",
+        "diagnosis_note": "This toolkit supports communication. It does not diagnose learners.",
+        "app_title": "Culturally Responsive Teacher Communication Toolkit",
+        "home_subtitle": "For supporting conversations with learners who may experience hidden learning or communication differences",
+        "home_intro": "This toolkit helps teachers prepare careful, respectful, and low-pressure conversations with students. It is designed especially for school contexts where direct labeling may create discomfort, stigma, or misunderstanding.",
+        "notice_title": "Notice without labeling",
+        "notice_body": "Recognize possible learning or communication needs without rushing to diagnosis.",
+        "speak_title": "Speak with care",
+        "speak_body": "Use language that lowers shame, protects dignity, and opens conversation.",
+        "support_title": "Support participation",
+        "support_body": "Offer multiple ways for students to show understanding and join classroom life.",
+        "important_note": "Important: This toolkit is not a diagnostic instrument. It supports communication, reflection, and inclusive classroom practice.",
+        "select_level": "Select school level",
+        "conversation_builder": "Conversation Builder",
+        "builder_intro": "Build a careful conversation response based on the situation and the school level.",
+        "who_speaking": "Who are you speaking with?",
+        "situation": "What is the situation?",
+        "conversation_guidance": "Conversation guidance",
+        "recommended_tone": "Recommended tone",
+        "main_principle": "Main principle",
+        "suggested_response": "Suggested response",
+        "avoid_saying": "Avoid saying",
+        "try_saying": "Try saying",
+        "softer_version": "Softer version",
+        "follow_up_question": "Follow-up question",
+        "before_speak": "Before you speak, ask yourself",
+        "before_speak_prompt": "Will this conversation protect the learner’s dignity, avoid premature labeling, and make support easier to access?",
+        "copy_ready": "Copy-ready note",
+        "audience": "Audience",
+        "school_level": "School level",
+        "student": "Student",
+    },
+    "ja": {
+        "sidebar_title": "教師コミュニケーション・ツールキット",
+        "sidebar_caption": "教室での対話を支える、文化的に配慮したサポート",
+        "menu": "メニュー",
+        "diagnosis_note": "このツールキットは対話を支援するものであり、学習者を診断するものではありません。",
+        "app_title": "文化的に配慮した教師コミュニケーション・ツールキット",
+        "home_subtitle": "見えにくい学びやコミュニケーションの困難を抱える可能性のある学習者との対話を支えるために",
+        "home_intro": "このツールキットは、教師が生徒と慎重で、尊重のある、低いプレッシャーの対話を準備するためのものです。直接的なラベルづけが不安、偏見、誤解につながりやすい学校現場を想定しています。",
+        "notice_title": "ラベルづけせずに気づく",
+        "notice_body": "診断を急がず、学びやコミュニケーション上のニーズの可能性に気づく。",
+        "speak_title": "配慮して話す",
+        "speak_body": "恥ずかしさを和らげ、尊厳を守り、対話を開く言葉を使う。",
+        "support_title": "参加を支える",
+        "support_body": "生徒が理解を示し、教室に参加するための複数の方法を用意する。",
+        "important_note": "重要：このツールキットは診断のためのものではありません。対話、振り返り、インクルーシブな教室実践を支援するものです。",
+        "select_level": "学校段階を選択",
+        "conversation_builder": "会話ビルダー",
+        "builder_intro": "状況と学校段階に応じて、配慮ある声かけを組み立てます。",
+        "who_speaking": "誰と話しますか？",
+        "situation": "どのような状況ですか？",
+        "conversation_guidance": "対話のガイド",
+        "recommended_tone": "おすすめの話し方",
+        "main_principle": "大切にする原則",
+        "suggested_response": "声かけの例",
+        "avoid_saying": "避けたい言い方",
+        "try_saying": "試したい言い方",
+        "softer_version": "よりやわらかい言い方",
+        "follow_up_question": "次の問いかけ",
+        "before_speak": "話す前に考えること",
+        "before_speak_prompt": "この対話は、生徒の尊厳を守り、早すぎるラベルづけを避け、支援につながりやすくしているでしょうか？",
+        "copy_ready": "コピー用メモ",
+        "audience": "相手",
+        "school_level": "学校段階",
+        "student": "生徒",
+    },
+}
+
 st.set_page_config(
     page_title="Teacher Communication Toolkit",
     page_icon="🌱",
@@ -25,6 +102,7 @@ LANGUAGE_CHOICE = st.sidebar.selectbox(
     key="language_toggle",
 )
 LANG = "ja" if LANGUAGE_CHOICE == "日本語" else "en"
+t = TEXT[LANG]
 st.sidebar.markdown("---")
 
 # -----------------------------
@@ -149,90 +227,6 @@ def phrase_block(label, text, block_type="phrase"):
 
 
 apply_brand_styles()
-
-# -----------------------------
-# Language Support
-# -----------------------------
-
-TEXT = {
-    "en": {
-        "language_label": "Language / 言語",
-        "english": "English",
-        "japanese": "日本語",
-        "app_title": "Culturally Responsive Teacher Communication Toolkit",
-        "sidebar_title": "Teacher Communication Toolkit",
-        "sidebar_caption": "Culturally responsive support for classroom conversations",
-        "menu": "Menu",
-        "diagnosis_note": "This toolkit supports communication. It does not diagnose learners.",
-        "home_subtitle": "For supporting conversations with learners who may experience hidden learning or communication differences",
-        "home_intro": "This toolkit helps teachers prepare careful, respectful, and low-pressure conversations with students. It is designed especially for school contexts where direct labeling may create discomfort, stigma, or misunderstanding.",
-        "notice_title": "Notice without labeling",
-        "notice_body": "Recognize possible learning or communication needs without rushing to diagnosis.",
-        "speak_title": "Speak with care",
-        "speak_body": "Use language that lowers shame, protects dignity, and opens conversation.",
-        "support_title": "Support participation",
-        "support_body": "Offer multiple ways for students to show understanding and join classroom life.",
-        "important_note": "Important: This toolkit is not a diagnostic instrument. It supports communication, reflection, and inclusive classroom practice.",
-        "select_level": "Select school level",
-        "conversation_builder": "Conversation Builder",
-        "builder_intro": "Build a careful conversation response based on the situation and the school level.",
-        "who_speaking": "Who are you speaking with?",
-        "situation": "What is the situation?",
-        "conversation_guidance": "Conversation guidance",
-        "recommended_tone": "Recommended tone",
-        "main_principle": "Main principle",
-        "suggested_response": "Suggested response",
-        "avoid_saying": "Avoid saying",
-        "try_saying": "Try saying",
-        "softer_version": "Softer version",
-        "follow_up_question": "Follow-up question",
-        "before_speak": "Before you speak, ask yourself",
-        "before_speak_prompt": "Will this conversation protect the learner’s dignity, avoid premature labeling, and make support easier to access?",
-        "copy_ready": "Copy-ready note",
-        "audience": "Audience",
-        "school_level": "School level",
-        "student": "Student",
-    },
-    "ja": {
-        "language_label": "Language / 言語",
-        "english": "English",
-        "japanese": "日本語",
-        "app_title": "文化的に配慮した教師コミュニケーション・ツールキット",
-        "sidebar_title": "教師コミュニケーション・ツールキット",
-        "sidebar_caption": "教室での対話を支える、文化的に配慮したサポート",
-        "menu": "メニュー",
-        "diagnosis_note": "このツールキットは対話を支援するものであり、学習者を診断するものではありません。",
-        "home_subtitle": "見えにくい学びやコミュニケーションの困難を抱える可能性のある学習者との対話を支えるために",
-        "home_intro": "このツールキットは、教師が生徒と慎重で、尊重のある、低いプレッシャーの対話を準備するためのものです。直接的なラベルづけが不安、偏見、誤解につながりやすい学校現場を想定しています。",
-        "notice_title": "ラベルづけせずに気づく",
-        "notice_body": "診断を急がず、学びやコミュニケーション上のニーズの可能性に気づく。",
-        "speak_title": "配慮して話す",
-        "speak_body": "恥ずかしさを和らげ、尊厳を守り、対話を開く言葉を使う。",
-        "support_title": "参加を支える",
-        "support_body": "生徒が理解を示し、教室に参加するための複数の方法を用意する。",
-        "important_note": "重要：このツールキットは診断のためのものではありません。対話、振り返り、インクルーシブな教室実践を支援するものです。",
-        "select_level": "学校段階を選択",
-        "conversation_builder": "会話ビルダー",
-        "builder_intro": "状況と学校段階に応じて、配慮ある声かけを組み立てます。",
-        "who_speaking": "誰と話しますか？",
-        "situation": "どのような状況ですか？",
-        "conversation_guidance": "対話のガイド",
-        "recommended_tone": "おすすめの話し方",
-        "main_principle": "大切にする原則",
-        "suggested_response": "声かけの例",
-        "avoid_saying": "避けたい言い方",
-        "try_saying": "試したい言い方",
-        "softer_version": "よりやわらかい言い方",
-        "follow_up_question": "次の問いかけ",
-        "before_speak": "話す前に考えること",
-        "before_speak_prompt": "この対話は、生徒の尊厳を守り、早すぎるラベルづけを避け、支援につながりやすくしているでしょうか？",
-        "copy_ready": "コピー用メモ",
-        "audience": "相手",
-        "school_level": "学校段階",
-        "student": "生徒",
-    },
-}
-
 
 # -----------------------------
 # Content Data
