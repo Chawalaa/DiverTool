@@ -84,6 +84,19 @@ TEXT = {
 }
 
 st.set_page_config(
+    # Language toggle
+st.sidebar.markdown("### Language / 言語")
+
+language = st.sidebar.selectbox(
+    "Choose language / 言語を選択",
+    ["English", "日本語"],
+    key="language_toggle"
+)
+
+if language == "日本語":
+    st.sidebar.write("現在の言語：日本語")
+else:
+    st.sidebar.write("Current language: English")
     page_title="Teacher Communication Toolkit",
     page_icon="🌱",
     layout="wide",
