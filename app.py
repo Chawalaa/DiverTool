@@ -22,6 +22,7 @@ st.set_page_config(
 st.sidebar.markdown("### Language / 言語")
 
 language = st.sidebar.selectbox(
+   "Language / 言語",
     ["English", "日本語"],
     index=0,
     key="language_toggle",
