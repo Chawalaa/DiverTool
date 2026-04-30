@@ -137,6 +137,99 @@ def phrase_block(label, text, block_type="phrase"):
 apply_brand_styles()
 
 # -----------------------------
+# Language Support
+# -----------------------------
+
+TEXT = {
+    "en": {
+        "language_label": "Language / 言語",
+        "english": "English",
+        "japanese": "日本語",
+        "app_title": "Culturally Responsive Teacher Communication Toolkit",
+        "sidebar_title": "Teacher Communication Toolkit",
+        "sidebar_caption": "Culturally responsive support for classroom conversations",
+        "menu": "Menu",
+        "diagnosis_note": "This toolkit supports communication. It does not diagnose learners.",
+        "home_subtitle": "For supporting conversations with learners who may experience hidden learning or communication differences",
+        "home_intro": "This toolkit helps teachers prepare careful, respectful, and low-pressure conversations with students. It is designed especially for school contexts where direct labeling may create discomfort, stigma, or misunderstanding.",
+        "notice_title": "Notice without labeling",
+        "notice_body": "Recognize possible learning or communication needs without rushing to diagnosis.",
+        "speak_title": "Speak with care",
+        "speak_body": "Use language that lowers shame, protects dignity, and opens conversation.",
+        "support_title": "Support participation",
+        "support_body": "Offer multiple ways for students to show understanding and join classroom life.",
+        "important_note": "Important: This toolkit is not a diagnostic instrument. It supports communication, reflection, and inclusive classroom practice.",
+        "select_level": "Select school level",
+        "conversation_builder": "Conversation Builder",
+        "builder_intro": "Build a careful conversation response based on the situation and the school level.",
+        "who_speaking": "Who are you speaking with?",
+        "situation": "What is the situation?",
+        "conversation_guidance": "Conversation guidance",
+        "recommended_tone": "Recommended tone",
+        "main_principle": "Main principle",
+        "suggested_response": "Suggested response",
+        "avoid_saying": "Avoid saying",
+        "try_saying": "Try saying",
+        "softer_version": "Softer version",
+        "follow_up_question": "Follow-up question",
+        "before_speak": "Before you speak, ask yourself",
+        "before_speak_prompt": "Will this conversation protect the learner’s dignity, avoid premature labeling, and make support easier to access?",
+        "copy_ready": "Copy-ready note",
+        "audience": "Audience",
+        "school_level": "School level",
+        "student": "Student",
+    },
+    "ja": {
+        "language_label": "Language / 言語",
+        "english": "English",
+        "japanese": "日本語",
+        "app_title": "文化的に配慮した教師コミュニケーション・ツールキット",
+        "sidebar_title": "教師コミュニケーション・ツールキット",
+        "sidebar_caption": "教室での対話を支える、文化的に配慮したサポート",
+        "menu": "メニュー",
+        "diagnosis_note": "このツールキットは対話を支援するものであり、学習者を診断するものではありません。",
+        "home_subtitle": "見えにくい学びやコミュニケーションの困難を抱える可能性のある学習者との対話を支えるために",
+        "home_intro": "このツールキットは、教師が生徒と慎重で、尊重のある、低いプレッシャーの対話を準備するためのものです。直接的なラベルづけが不安、偏見、誤解につながりやすい学校現場を想定しています。",
+        "notice_title": "ラベルづけせずに気づく",
+        "notice_body": "診断を急がず、学びやコミュニケーション上のニーズの可能性に気づく。",
+        "speak_title": "配慮して話す",
+        "speak_body": "恥ずかしさを和らげ、尊厳を守り、対話を開く言葉を使う。",
+        "support_title": "参加を支える",
+        "support_body": "生徒が理解を示し、教室に参加するための複数の方法を用意する。",
+        "important_note": "重要：このツールキットは診断のためのものではありません。対話、振り返り、インクルーシブな教室実践を支援するものです。",
+        "select_level": "学校段階を選択",
+        "conversation_builder": "会話ビルダー",
+        "builder_intro": "状況と学校段階に応じて、配慮ある声かけを組み立てます。",
+        "who_speaking": "誰と話しますか？",
+        "situation": "どのような状況ですか？",
+        "conversation_guidance": "対話のガイド",
+        "recommended_tone": "おすすめの話し方",
+        "main_principle": "大切にする原則",
+        "suggested_response": "声かけの例",
+        "avoid_saying": "避けたい言い方",
+        "try_saying": "試したい言い方",
+        "softer_version": "よりやわらかい言い方",
+        "follow_up_question": "次の問いかけ",
+        "before_speak": "話す前に考えること",
+        "before_speak_prompt": "この対話は、生徒の尊厳を守り、早すぎるラベルづけを避け、支援につながりやすくしているでしょうか？",
+        "copy_ready": "コピー用メモ",
+        "audience": "相手",
+        "school_level": "学校段階",
+        "student": "生徒",
+    },
+}
+
+
+def get_language():
+    lang_choice = st.sidebar.radio(
+        TEXT["en"]["language_label"],
+        [TEXT["en"]["english"], TEXT["en"]["japanese"]],
+        horizontal=True,
+    )
+    return "ja" if lang_choice == TEXT["en"]["japanese"] else "en"
+
+
+# -----------------------------
 # Content Data
 # -----------------------------
 
@@ -275,11 +368,14 @@ CONVERSATION_BUILDER = {
 # Sidebar Navigation
 # -----------------------------
 
-st.sidebar.title("Teacher Communication Toolkit")
-st.sidebar.caption("Culturally responsive support for classroom conversations")
+LANG = get_language()
+t = TEXT[LANG]
+
+st.sidebar.title(t["sidebar_title"])
+st.sidebar.caption(t["sidebar_caption"])
 
 page = st.sidebar.radio(
-    "Menu",
+    t["menu"],
     [
         "Home",
         "Noticing Learners",
@@ -296,30 +392,25 @@ page = st.sidebar.radio(
 )
 
 st.sidebar.markdown("---")
-st.sidebar.caption("This toolkit supports communication. It does not diagnose learners.")
+st.sidebar.caption(t["diagnosis_note"])
 
 # -----------------------------
 # Pages
 # -----------------------------
 
 if page == "Home":
-    st.title("Culturally Responsive Teacher Communication Toolkit")
-    st.subheader("For supporting conversations with learners who may experience hidden learning or communication differences")
+    st.title(t["app_title"])
+    st.subheader(t["home_subtitle"])
 
-    st.markdown(
-        """
-        This toolkit helps teachers prepare careful, respectful, and low-pressure conversations with students, parents, and colleagues.
-        It is designed especially for school contexts where direct labeling may create discomfort, stigma, or misunderstanding.
-        """
-    )
+    st.markdown(t["home_intro"])
 
     col1, col2, col3 = st.columns(3)
     with col1:
-        card("Notice without labeling", "Recognize possible learning or communication needs without rushing to diagnosis.", "soft-blue")
+        card(t["notice_title"], t["notice_body"], "soft-blue")
     with col2:
-        card("Speak with care", "Use language that lowers shame, protects dignity, and opens conversation.", "mint")
+        card(t["speak_title"], t["speak_body"], "mint")
     with col3:
-        card("Support participation", "Offer multiple ways for students to show understanding and join classroom life.", "peach")
+        card(t["support_title"], t["support_body"], "peach")
 
     st.markdown("### What this toolkit includes")
     st.markdown(
@@ -333,13 +424,13 @@ if page == "Home":
         """
     )
 
-    st.info("Important: This toolkit is not a diagnostic instrument. It supports communication, reflection, and inclusive classroom practice.")
+    st.info(t["important_note"])
 
 elif page == "Noticing Learners":
     st.title("Noticing Learners")
     st.write("Use this page to think about what teachers may observe before beginning a supportive conversation.")
 
-    level = st.selectbox("Select school level", LEVELS)
+    level = st.selectbox(t["select_level"], LEVELS)
 
     st.markdown("### What teachers may notice")
     for item in NOTICING_EXAMPLES[level]:
@@ -377,37 +468,37 @@ elif page == "Conversation Support":
     st.info("The goal is not to make the learner explain everything. The goal is to make support easier to access without shame.")
 
 elif page == "Conversation Builder":
-    st.title("Conversation Builder")
-    st.write("Build a careful conversation response based on who you are speaking with, the situation, and the school level.")
+    st.title(t["conversation_builder"])
+    st.write(t["builder_intro"])
 
     col1, col2, col3 = st.columns(3)
     with col1:
-        audience = st.selectbox("Who are you speaking with?", ["Student"])
+        audience = st.selectbox(t["who_speaking"], ["Student"], format_func=lambda x: t["student"])
     with col2:
-        builder_situation = st.selectbox("What is the situation?", list(CONVERSATION_BUILDER[audience].keys()))
+        builder_situation = st.selectbox(t["situation"], list(CONVERSATION_BUILDER[audience].keys()))
     with col3:
         level = st.selectbox("Select school level", LEVELS)
 
     guidance = AUDIENCE_GUIDANCE[audience]
     response = CONVERSATION_BUILDER[audience][builder_situation]
 
-    st.markdown("### Conversation guidance")
+    st.markdown(f"### {t['conversation_guidance']}")
     col1, col2 = st.columns(2)
     with col1:
-        card("Recommended tone", guidance["tone"], "soft-blue")
+        card(t["recommended_tone"], guidance["tone"], "soft-blue")
     with col2:
-        card("Main principle", guidance["principle"], "mint")
+        card(t["main_principle"], guidance["principle"], "mint")
 
-    st.markdown("### Suggested response")
-    phrase_block("Avoid saying", response["avoid"], "avoid")
-    phrase_block("Try saying", response["main"][level], "try")
-    phrase_block("Softer version", response["softer"][level], "phrase")
-    phrase_block("Follow-up question", guidance["follow_up"], "phrase")
+    st.markdown(f"### {t['suggested_response']}")
+    phrase_block(t["avoid_saying"], response["avoid"], "avoid")
+    phrase_block(t["try_saying"], response["main"][level], "try")
+    phrase_block(t["softer_version"], response["softer"][level], "phrase")
+    phrase_block(t["follow_up_question"], guidance["follow_up"], "phrase")
 
-    st.markdown("### Before you speak, ask yourself")
-    st.warning("Will this conversation protect the learner’s dignity, avoid premature labeling, and make support easier to access?")
+    st.markdown(f"### {t['before_speak']}")
+    st.warning(t["before_speak_prompt"])
 
-    st.markdown("### Copy-ready note")
+    st.markdown(f"### {t['copy_ready']}")
     st.code(
         f"""Audience: {audience}
 Situation: {builder_situation}
