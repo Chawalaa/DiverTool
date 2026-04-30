@@ -221,12 +221,14 @@ TEXT = {
 
 
 def get_language():
-    lang_choice = st.sidebar.radio(
-        TEXT["en"]["language_label"],
-        [TEXT["en"]["english"], TEXT["en"]["japanese"]],
-        horizontal=True,
+    st.sidebar.markdown("### Language / 言語")
+    lang_choice = st.sidebar.selectbox(
+        "Choose language",
+        ["English", "日本語"],
+        index=0,
     )
-    return "ja" if lang_choice == TEXT["en"]["japanese"] else "en"
+    st.sidebar.markdown("---")
+    return "ja" if lang_choice == "日本語" else "en"
 
 
 # -----------------------------
