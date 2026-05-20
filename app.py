@@ -36,7 +36,7 @@ st.sidebar.markdown("---")
 # -----------------------------
 TEXT = {
     "en": {
-        "sidebar_title": "Teacher Communication Toolkit",
+        "sidebar_title": "DOTS Toolkit",
         "sidebar_caption": "Support for teacher–student communication",
         "menu": "Menu",
         "diagnosis_note": "This toolkit supports communication. It does not diagnose learners.",
