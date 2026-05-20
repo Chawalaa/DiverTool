@@ -51,7 +51,7 @@ TEXT = {
         "reflection": "Teacher Reflection",
         "feedback": "Feedback",
         "about": "About the Research",
-        "app_title": "Culturally Responsive Teacher Communication Toolkit",
+        "app_title": "DOTS Toolkit",
         "home_subtitle": "For supporting teacher–student conversations with learners who may experience hidden learning or communication differences",
         "home_intro": "This toolkit helps teachers prepare careful, respectful, and low-pressure conversations with students. It is designed especially for school contexts where direct labeling may create discomfort, stigma, or misunderstanding.",
         "notice_title": "Notice without labeling",
