@@ -725,6 +725,7 @@ elif page == "Quick Classroom Tools":
     ]
 
     for doc in DOCUMENTS:
+
         title = doc["title_ja"] if LANG == "ja" else doc["title_en"]
         description = doc["description_ja"] if LANG == "ja" else doc["description_en"]
 
@@ -735,13 +736,42 @@ elif page == "Quick Classroom Tools":
             with open(doc["file"], "rb") as file:
                 pdf_bytes = file.read()
 
-            st.download_button(
-                label="PDFをダウンロード" if LANG == "ja" else "Download PDF",
-                data=pdf_bytes,
-                file_name=doc["file"].split("/")[-1],
-                mime="application/pdf",
-                key=f"download_{doc['file']}",
-            )
+            col1, col2 = st.columns(2)
+
+            # Download Button
+            with col1:
+                st.download_button(
+                    label="PDFをダウンロード" if LANG == "ja" else "Download PDF",
+                    data=pdf_bytes,
+                    file_name=doc["file"].split("/")[-1],
+                    mime="application/pdf",
+                    key=f"download_{doc['file']}",
+                )
+
+            # View Button
+            with col2:
+                import base64
+
+                base64_pdf = base64.b64encode(pdf_bytes).decode("utf-8")
+
+                st.markdown(
+                    f"""
+                    <a href="data:application/pdf;base64,{base64_pdf}"
+                       target="_blank"
+                       style="
+                            display:inline-block;
+                            padding:0.5rem 1rem;
+                            background-color:#DCEEFF;
+                            border-radius:8px;
+                            text-decoration:none;
+                            color:black;
+                            font-weight:600;
+                       ">
+                        {"PDFを見る" if LANG == "ja" else "View PDF"}
+                    </a>
+                    """,
+                    unsafe_allow_html=True,
+                )
 
         except FileNotFoundError:
             st.warning(
