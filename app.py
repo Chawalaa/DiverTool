@@ -1,6 +1,5 @@
 import streamlit as st
 from datetime import datetime
-import base64
 
 # =====================================================
 # Culturally Responsive Teacher Communication Toolkit
@@ -737,41 +736,12 @@ elif page == "Quick Classroom Tools":
                 pdf_bytes = file.read()
 
             st.download_button(
-                label="ダウンロード" if LANG == "ja" else "Download",
+                label="PDFをダウンロード" if LANG == "ja" else "Download PDF",
                 data=pdf_bytes,
                 file_name=doc["file"].split("/")[-1],
                 mime="application/pdf",
-                key=f"download_{title}",
+                key=f"download_{doc['file']}",
             )
-
-            with st.expander("表示 / View"):
-                base64_pdf = base64.b64encode(pdf_bytes).decode("utf-8")
-
-                href = f"""
-                <a 
-                    href="data:application/pdf;base64,{base64_pdf}" 
-                    target="_blank"
-                    style="
-                        display:inline-block;
-                        padding:0.7rem 1rem;
-                        border-radius:10px;
-                        background:#DCEEFF;
-                        color:#2F2F2F;
-                        text-decoration:none;
-                        font-weight:600;
-                    "
-                >
-                    {"PDFを新しいタブで開く" if LANG == "ja" else "Open PDF in new tab"}
-                </a>
-                """
-
-                st.markdown(href, unsafe_allow_html=True)
-
-                st.info(
-                    "プレビューが表示されない場合は、新しいタブで開くか、ダウンロードしてください。"
-                    if LANG == "ja"
-                    else "If the preview does not appear, open the PDF in a new tab or download it."
-                )
 
         except FileNotFoundError:
             st.warning(
