@@ -702,57 +702,51 @@ elif page == "Quick Classroom Tools":
 
     DOCUMENTS = [
         {
-            "title_en": "Conversation Support Card",
-            "title_ja": "対話サポートカード",
-            "description_en": "For preparing gentle teacher–student conversations.",
-            "description_ja": "教師と生徒のやわらかい対話を準備するためのカード。",
+            "title": "Conversation Support Card",
             "file": "documents/conversation_support_card.pdf",
         },
         {
-            "title_en": "Teacher Reflection Card",
-            "title_ja": "教師の振り返りカード",
-            "description_en": "For reflecting before and after classroom communication moments.",
-            "description_ja": "教室での対話の前後に振り返るためのカード。",
+            "title": "Teacher Reflection Card",
             "file": "documents/teacher_reflection_card.pdf",
         },
         {
-            "title_en": "Visual Metaphor Cards",
-            "title_ja": "視覚メタファーカード",
-            "description_en": "Dots, Waves, and Pathways for classroom explanation.",
-            "description_ja": "Dots、Waves、Pathways を使った教室での説明用カード。",
+            "title": "Visual Metaphor Cards",
             "file": "documents/visual_metaphor_cards.pdf",
         },
     ]
 
     for doc in DOCUMENTS:
-        title = doc["title_ja"] if LANG == "ja" else doc["title_en"]
-        description = doc["description_ja"] if LANG == "ja" else doc["description_en"]
-
-        st.markdown(f"### {title}")
-        st.write(description)
+        st.markdown(f"### {doc['title']}")
 
         try:
             with open(doc["file"], "rb") as file:
                 pdf_bytes = file.read()
 
             st.download_button(
-                label="ダウンロード" if LANG == "ja" else "Download",
+                label="Download",
                 data=pdf_bytes,
                 file_name=doc["file"].split("/")[-1],
                 mime="application/pdf",
+                key=f"download_{doc['title']}",
             )
 
             with st.expander("表示 / View"):
-                st.pdf(doc["file"])
+                base64_pdf = base64.b64encode(pdf_bytes).decode("utf-8")
+                pdf_display = f"""
+                <iframe 
+                    src="data:application/pdf;base64,{base64_pdf}" 
+                    width="100%" 
+                    height="700px" 
+                    type="application/pdf">
+                </iframe>
+                """
+                st.markdown(pdf_display, unsafe_allow_html=True)
 
         except FileNotFoundError:
-            st.warning(
-                "File not found. Please upload this document to the documents folder."
-                if LANG == "en"
-                else "ファイルが見つかりません。documents フォルダにアップロードしてください。"
-            )
+            st.warning(f"File not found: {doc['file']}")
 
         st.markdown("---")
+        
 elif page == "Scenario Practice":
     st.title(t["scenario_practice"])
 
