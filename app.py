@@ -700,35 +700,59 @@ elif page == "Visual Metaphors":
 elif page == "Quick Classroom Tools":
     st.title(t["quick_tools"])
 
-    if LANG == "en":
-        st.write("This page will hold printable and downloadable tools. Add your PDFs later in the assets folder.")
-        tools = [
-            ("Conversation Support Card", "For preparing gentle student conversations."),
-            ("Teacher Reflection Card", "For thinking before and after difficult communication moments."),
-            ("Student Participation Options Card", "For offering alternatives to speaking, presenting, or group work."),
-            ("Visual Metaphor Cards", "Dots, Waves, and Pathways for classroom explanation."),
-            ("Observation Notes Template", "For recording classroom observations respectfully."),
-        ]
-    else:
-        st.write("このページには、印刷・ダウンロード可能なツールを配置できます。PDFは後で assets フォルダに追加できます。")
-        tools = [
-            ("対話サポートカード", "生徒とのやわらかい対話を準備するためのカード。"),
-            ("教師の振り返りカード", "難しい対話の前後に考えるためのカード。"),
-            ("参加方法カード", "話す、発表する、グループ活動に参加する以外の方法を示すカード。"),
-            ("視覚メタファーカード", "Dots、Waves、Pathways を使った教室での説明用カード。"),
-            ("観察メモテンプレート", "教室での観察を尊重のある形で記録するためのテンプレート。"),
-        ]
+    DOCUMENTS = [
+        {
+            "title_en": "Conversation Support Card",
+            "title_ja": "対話サポートカード",
+            "description_en": "For preparing gentle teacher–student conversations.",
+            "description_ja": "教師と生徒のやわらかい対話を準備するためのカード。",
+            "file": "documents/conversation_support_card.pdf",
+        },
+        {
+            "title_en": "Teacher Reflection Card",
+            "title_ja": "教師の振り返りカード",
+            "description_en": "For reflecting before and after classroom communication moments.",
+            "description_ja": "教室での対話の前後に振り返るためのカード。",
+            "file": "documents/teacher_reflection_card.pdf",
+        },
+        {
+            "title_en": "Visual Metaphor Cards",
+            "title_ja": "視覚メタファーカード",
+            "description_en": "Dots, Waves, and Pathways for classroom explanation.",
+            "description_ja": "Dots、Waves、Pathways を使った教室での説明用カード。",
+            "file": "documents/visual_metaphor_cards.pdf",
+        },
+    ]
 
-    for title, description in tools:
+    for doc in DOCUMENTS:
+        title = doc["title_ja"] if LANG == "ja" else doc["title_en"]
+        description = doc["description_ja"] if LANG == "ja" else doc["description_en"]
+
         st.markdown(f"### {title}")
         st.write(description)
-        col1, col2 = st.columns(2)
-        with col1:
-            st.button(f"View / 表示: {title}", key=f"view_{title}")
-        with col2:
-            st.button(f"Download / ダウンロード: {title}", key=f"download_{title}")
-        st.markdown("---")
 
+        try:
+            with open(doc["file"], "rb") as file:
+                pdf_bytes = file.read()
+
+            st.download_button(
+                label="ダウンロード" if LANG == "ja" else "Download",
+                data=pdf_bytes,
+                file_name=doc["file"].split("/")[-1],
+                mime="application/pdf",
+            )
+
+            with st.expander("表示 / View"):
+                st.pdf(doc["file"])
+
+        except FileNotFoundError:
+            st.warning(
+                "File not found. Please upload this document to the documents folder."
+                if LANG == "en"
+                else "ファイルが見つかりません。documents フォルダにアップロードしてください。"
+            )
+
+        st.markdown("---")
 elif page == "Scenario Practice":
     st.title(t["scenario_practice"])
 
