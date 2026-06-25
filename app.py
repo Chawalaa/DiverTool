@@ -1,5 +1,6 @@
 import streamlit as st
 from datetime import datetime
+import base64
 
 # =====================================================
 # Culturally Responsive Teacher Communication Toolkit
