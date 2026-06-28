@@ -600,7 +600,7 @@ elif page == "Scenario Practice":
         SCENARIO_KEYS,
         phrase_block,
     )
- elif page == "Teacher Reflection":
+elif page == "Teacher Reflection":
     render_teacher_reflection(t, LANG)   
 
 
