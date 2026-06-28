@@ -11,7 +11,7 @@ from datetime import datetime
 # -----------------------------
 st.set_page_config(
     page_title="DOTS Toolkit",
-    page_icon="🌱",
+    page_icon="assets/dots_logo",
     layout="wide",
     initial_sidebar_state="expanded",
 )
