@@ -4,6 +4,7 @@ from pages.home import render_home
 from pages.feedback import render_feedback
 from pages.about_the_research import render_about_the_research
 from pages.quick_classroom_tools import render_quick_tools
+from pages.scenario_practice import render_scenario_practice
 # =====================================================
 # Culturally Responsive Teacher Communication Toolkit
 # Teacher–Student Communication Focus
@@ -588,7 +589,17 @@ elif page == "Feedback":
 
 elif page == "About the Research":
     render_about_the_research(t, LANG)
-
+elif page == "Scenario Practice":
+    render_scenario_practice(
+        t,
+        LANG,
+        LEVELS,
+        LEVEL_LABELS,
+        CONVERSATION_BUILDER,
+        SCENARIO_KEYS,
+        phrase_block,
+    )
+    
 
 
 
