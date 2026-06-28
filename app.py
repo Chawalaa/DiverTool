@@ -676,7 +676,7 @@ st.markdown(f"### {t['what_teachers_notice']}")
 for item in NOTICING_EXAMPLES[level][LANG]:
         st.markdown(f"- {item}")
 
-    st.markdown(f"### {t['what_not_to_assume']}")
+st.markdown(f"### {t['what_not_to_assume']}")
 
     if LANG == "en":
         phrase_block(
