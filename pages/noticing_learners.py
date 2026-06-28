@@ -87,27 +87,11 @@ def render_noticing(
 
     if LANG == "en":
         hero_box(
-            "👀 Notice First. Interpret Later.",
-            """
-            Hidden learning and communication differences are not always immediately visible.
-            <br><br>
-            Rather than drawing conclusions from a single classroom moment, observe patterns over time,
-            consider the learning environment, and remain curious about what may not yet be visible.
-            <br><br>
-            Inclusive communication begins with careful observation rather than assumptions.
-            """,
+            "Notice First. Interpret Later.",
         )
     else:
         hero_box(
-            "👀 まず気づき、あとで考える",
-            """
-            学びやコミュニケーションの違いは、すぐには見えないことがあります。
-            <br><br>
-            一度の様子だけで判断するのではなく、時間をかけて観察し、
-            学習環境や背景を考えながら、見えていない可能性にも目を向けます。
-            <br><br>
-            インクルーシブな対話は、決めつけではなく、丁寧な気づきから始まります。
-            """,
+            "まず気づき、あとで考える",
         )
 
     st.divider()
