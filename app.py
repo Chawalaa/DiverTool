@@ -627,6 +627,55 @@ if page == "Home":
                 )
 
     st.info(t["important_note"])
+    elif page == "Noticing Learners":
+    st.title(t["noticing"])
+
+    level = st.selectbox(
+        t["select_level"],
+        LEVELS,
+        format_func=lambda x: LEVEL_LABELS[LANG][x],
+    )
+
+    st.markdown(f"### {t['what_teachers_notice']}")
+
+    for item in NOTICING_EXAMPLES[level][LANG]:
+        st.markdown(f"- {item}")
+
+    st.markdown(f"### {t['what_not_to_assume']}")
+
+    if LANG == "en":
+        phrase_block(
+            "Avoid assuming",
+            "The student is lazy, disrespectful, careless, or incapable.",
+            "avoid"
+        )
+
+        phrase_block(
+            "Consider instead",
+            "The student may be unsure, overwhelmed, embarrassed, masking difficulty, or needing another way to participate.",
+            "try"
+        )
+
+        st.warning(
+            "What might this learner be experiencing that is not immediately visible?"
+        )
+
+    else:
+        phrase_block(
+            "避けたい決めつけ",
+            "生徒が怠けている、失礼である、不注意である、能力がないと決めつけること。",
+            "avoid"
+        )
+
+        phrase_block(
+            "代わりに考えたいこと",
+            "生徒は不安、圧倒されている、恥ずかしい、困難を隠している、または別の参加方法を必要としているかもしれません。",
+            "try"
+        )
+
+        st.warning(
+            "この生徒には、すぐには見えないどのような経験があるかもしれませんか？"
+        )
 
 elif page == "Conversation Support":
     st.title(t["conversation_support"])
