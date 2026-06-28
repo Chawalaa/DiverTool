@@ -1,7 +1,7 @@
 import streamlit as st
 import base64
 
-
+def render_conversation_builder(
 def autoplay_video(video_path):
     with open(video_path, "rb") as video_file:
         video_bytes = video_file.read()
