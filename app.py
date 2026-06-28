@@ -607,5 +607,14 @@ elif page == "Teacher Reflection":
     
 elif page == "Visual Metaphors":
     render_visual_metaphors(t, LANG)
-
+elif page == "Scripts by Situation":
+    render_scripts(
+        t,
+        LANG,
+        LEVELS,
+        LEVEL_LABELS,
+        CONVERSATION_BUILDER,
+        SCENARIO_KEYS,
+        phrase_block,
+    )
 
