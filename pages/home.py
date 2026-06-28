@@ -1,19 +1,53 @@
 import streamlit as st
+import base64
 
 
+# ---------------------------------------------------
+# Autoplay Video (Home page only)
+# ---------------------------------------------------
+def autoplay_video(video_path):
+
+    with open(video_path, "rb") as video_file:
+        video_bytes = video_file.read()
+
+    video_base64 = base64.b64encode(video_bytes).decode()
+
+    st.markdown(
+        f"""
+        <video
+            autoplay
+            loop
+            muted
+            playsinline
+            controlslist="nodownload nofullscreen noremoteplayback"
+            style="
+                width:100%;
+                border-radius:18px;
+                overflow:hidden;
+                margin-bottom:10px;
+            ">
+            <source
+                src="data:video/mp4;base64,{video_base64}"
+                type="video/mp4">
+        </video>
+        """,
+        unsafe_allow_html=True,
+    )
+
+
+# ---------------------------------------------------
+# Home Page
+# ---------------------------------------------------
 def render_home(t, LANG):
 
-    # ---------------------------------------------------
-    # Title
-    # ---------------------------------------------------
     st.title(t["app_title"])
     st.subheader(t["home_subtitle"])
 
-    # ---------------------------------------------------
+    # ---------------------------------------------
     # DOTS Intro Video
-    # ---------------------------------------------------
+    # ---------------------------------------------
     try:
-        st.video("assets/dots_intro.mp4")
+        autoplay_video("assets/dots_intro.mp4")
     except Exception:
         st.info(
             "Video not found."
@@ -21,14 +55,17 @@ def render_home(t, LANG):
             else "動画が見つかりません。"
         )
 
-    # ---------------------------------------------------
-    # Welcome Message
-    # ---------------------------------------------------
+    # ---------------------------------------------
+    # Welcome
+    # ---------------------------------------------
     if LANG == "en":
+
         st.info(
             "Welcome to the DOTS Toolkit. Explore practical communication strategies that help teachers notice learner needs, communicate with care, and support participation in culturally responsive ways."
         )
+
     else:
+
         st.info(
             "DOTSツールキットへようこそ。学習者のニーズに気づき、思いやりをもって対話し、文化的に配慮した形で参加を支えるための実践的なコミュニケーション方法を紹介します。"
         )
@@ -42,9 +79,9 @@ def render_home(t, LANG):
 
     st.divider()
 
-    # ---------------------------------------------------
-    # Styling
-    # ---------------------------------------------------
+    # ---------------------------------------------
+    # Card Styling
+    # ---------------------------------------------
     st.markdown(
         """
         <style>
@@ -61,7 +98,7 @@ def render_home(t, LANG):
             font-size:1rem;
             line-height:1.6;
             color:#555555;
-            min-height:95px;
+            min-height:90px;
         }
 
         div[data-testid="stImage"] img{
@@ -76,9 +113,9 @@ def render_home(t, LANG):
         unsafe_allow_html=True,
     )
 
-    # ---------------------------------------------------
+    # ---------------------------------------------
     # Home Cards
-    # ---------------------------------------------------
+    # ---------------------------------------------
     HOME_CARDS = [
 
         {
@@ -113,11 +150,14 @@ def render_home(t, LANG):
             with st.container(border=True):
 
                 try:
+
                     st.image(
                         item["image"],
                         use_container_width=True,
                     )
+
                 except Exception:
+
                     st.info(
                         "Image not found."
                         if LANG == "en"
@@ -127,11 +167,11 @@ def render_home(t, LANG):
                 st.markdown(
                     f"""
                     <div class="home-card-title">
-                        {item['title']}
+                        {item["title"]}
                     </div>
 
                     <div class="home-card-body">
-                        {item['body']}
+                        {item["body"]}
                     </div>
                     """,
                     unsafe_allow_html=True,
@@ -142,14 +182,15 @@ def render_home(t, LANG):
                     key=item["page"],
                     use_container_width=True,
                 ):
+
                     st.session_state.page = item["page"]
                     st.rerun()
 
     st.divider()
 
-    # ---------------------------------------------------
+    # ---------------------------------------------
     # Footer
-    # ---------------------------------------------------
+    # ---------------------------------------------
     st.success(
         "Designed for teacher–student communication."
         if LANG == "en"
