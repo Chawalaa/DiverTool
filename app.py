@@ -541,28 +541,17 @@ PAGE_LABELS = {
     "About the Research": t["about"],
 }
 
-pages = [
-    t["home"],
-    t["noticing"],
-    t["conversation_support"],
-    t["conversation_builder"],
-    t["scripts"],
-    t["visual_metaphors"],
-    t["quick_tools"],
-    t["scenario_practice"],
-    t["reflection"],
-    t["feedback"],
-    t["about"],
-]
+if st.session_state.page not in PAGE_OPTIONS:
+    st.session_state.page = "Home"
 
 page = st.sidebar.radio(
     t["menu"],
-    pages,
-    index=pages.index(st.session_state.page),
+    PAGE_OPTIONS,
+    index=PAGE_OPTIONS.index(st.session_state.page),
+    format_func=lambda x: PAGE_LABELS[x],
 )
 
 st.session_state.page = page
-
 # -----------------------------
 # Pages
 # -----------------------------
