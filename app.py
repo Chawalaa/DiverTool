@@ -627,7 +627,9 @@ if page == "Home":
                 )
 
     st.info(t["important_note"])
-    elif page == "Noticing Learners":
+
+
+elif page == "Noticing Learners":
     st.title(t["noticing"])
 
     level = st.selectbox(
@@ -647,13 +649,13 @@ if page == "Home":
         phrase_block(
             "Avoid assuming",
             "The student is lazy, disrespectful, careless, or incapable.",
-            "avoid"
+            "avoid",
         )
 
         phrase_block(
             "Consider instead",
             "The student may be unsure, overwhelmed, embarrassed, masking difficulty, or needing another way to participate.",
-            "try"
+            "try",
         )
 
         st.warning(
@@ -664,19 +666,18 @@ if page == "Home":
         phrase_block(
             "避けたい決めつけ",
             "生徒が怠けている、失礼である、不注意である、能力がないと決めつけること。",
-            "avoid"
+            "avoid",
         )
 
         phrase_block(
             "代わりに考えたいこと",
             "生徒は不安、圧倒されている、恥ずかしい、困難を隠している、または別の参加方法を必要としているかもしれません。",
-            "try"
+            "try",
         )
 
         st.warning(
             "この生徒には、すぐには見えないどのような経験があるかもしれませんか？"
         )
-
 elif page == "Conversation Support":
     st.title(t["conversation_support"])
 
