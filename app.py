@@ -671,7 +671,7 @@ level = st.selectbox(
         format_func=lambda x: LEVEL_LABELS[LANG][x],
     )
 
-    st.markdown(f"### {t['what_teachers_notice']}")
+st.markdown(f"### {t['what_teachers_notice']}")
 
     for item in NOTICING_EXAMPLES[level][LANG]:
         st.markdown(f"- {item}")
