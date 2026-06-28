@@ -682,7 +682,7 @@ elif page == "Visual Metaphors":
             "title_ja": "Dots",
             "body_en": "Different learners may connect ideas, people, and classroom activities in different ways.",
             "body_ja": "学習者は、考え、人、教室活動をそれぞれ異なる方法でつなげることがあります。",
-            "image": "assets/dots.png",
+            "image": "assets/dots.jpg",
         },
         {
             "title_en": "Waves",
