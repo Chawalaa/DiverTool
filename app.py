@@ -557,6 +557,36 @@ st.session_state.page = page
 if page == "Home":
     render_home(t, LANG)
 
+elif page == "Noticing Learners":
+    render_noticing(t, LANG, LEVELS, LEVEL_LABELS, NOTICING_EXAMPLES, phrase_block)
+
+elif page == "Conversation Support":
+    render_conversation_support(t, LANG, LEVELS, LEVEL_LABELS, CONVERSATION_BUILDER, phrase_block)
+
+elif page == "Conversation Builder":
+    render_conversation_builder(t, LANG, LEVELS, LEVEL_LABELS, CONVERSATION_BUILDER, SCENARIO_KEYS, card, phrase_block)
+
+elif page == "Scripts by Situation":
+    render_scripts(t, LANG, LEVELS, LEVEL_LABELS, CONVERSATION_BUILDER, SCENARIO_KEYS, phrase_block)
+
+elif page == "Visual Metaphors":
+    render_visual_metaphors(t, LANG)
+
+elif page == "Quick Classroom Tools":
+    render_quick_tools(t, LANG)
+
+elif page == "Scenario Practice":
+    render_scenario_practice(t, LANG, LEVELS, LEVEL_LABELS, CONVERSATION_BUILDER, SCENARIO_KEYS, phrase_block)
+
+elif page == "Teacher Reflection":
+    render_teacher_reflection(t, LANG)
+
+elif page == "Feedback":
+    render_feedback(t, LANG)
+
+elif page == "About the Research":
+    render_about_the_research(t, LANG)
+
 
 
 
