@@ -567,8 +567,10 @@ st.session_state.page = page
 # Pages
 # -----------------------------
 if page == "Home":
+
     st.title(t["app_title"])
     st.subheader(t["home_subtitle"])
+    st.write(t["home_intro"])
 
     st.markdown(
         """
@@ -582,18 +584,16 @@ if page == "Home":
         }
 
         .home-card-body {
-            font-size: 0.98rem;
-            line-height: 1.55;
-            color: #3F3F3F;
-            min-height: 95px;
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #444444;
+            min-height: 90px;
         }
 
         div[data-testid="stImage"] img {
-            height: 190px;
+            height: 200px;
             object-fit: cover;
             border-radius: 16px;
-            border: 1px solid #EEE8DF;
-            background: #FFFFFF;
         }
         </style>
         """,
@@ -605,72 +605,57 @@ if page == "Home":
             "title": t["notice_title"],
             "body": t["notice_body"],
             "image": "assets/notice_without_labeling.png",
+            "page": "Noticing Learners",
         },
         {
             "title": t["speak_title"],
             "body": t["speak_body"],
             "image": "assets/speak_with_care.png",
+            "page": "Conversation Support",
         },
         {
             "title": t["support_title"],
             "body": t["support_body"],
             "image": "assets/support_participation.png",
+            "page": "Conversation Builder",
         },
     ]
 
-    col1, col2, col3 = st.columns(3)
+    cols = st.columns(3)
 
-    for col, item in zip([col1, col2, col3], HOME_CARDS):
-    with col:
-        with st.container(border=True):
+    for col, item in zip(cols, HOME_CARDS):
 
-            st.image(item["image"], use_container_width=True)
+        with col:
 
-            st.markdown(
-                f"""
-                <div class="home-card-title">{item['title']}</div>
-                <div class="home-card-body">{item['body']}</div>
-                """,
-                unsafe_allow_html=True,
-            )
+            with st.container(border=True):
 
-            if item["title"] == t["notice_title"]:
-                if st.button(
-                    "Explore",
-                    key="home_notice",
+                st.image(
+                    item["image"],
                     use_container_width=True,
-                ):
-                    st.session_state.page = t["noticing"]
-                    st.rerun()
-
-            elif item["title"] == t["speak_title"]:
-                if st.button(
-                    "Explore",
-                    key="home_speak",
-                    use_container_width=True,
-                ):
-                    st.session_state.page = t["conversation_support"]
-                    st.rerun()
-
-            else:
-                if st.button(
-                    "Explore",
-                    key="home_support",
-                    use_container_width=True,
-                ):
-                    st.session_state.page = t["conversation_builder"]
-                    st.rerun()
+                )
 
                 st.markdown(
                     f"""
-                    <div class="home-card-title">{item['title']}</div>
-                    <div class="home-card-body">{item['body']}</div>
+                    <div class="home-card-title">
+                        {item['title']}
+                    </div>
+
+                    <div class="home-card-body">
+                        {item['body']}
+                    </div>
                     """,
                     unsafe_allow_html=True,
                 )
 
-    st.info(t["important_note"])
+                if st.button(
+                    "Explore" if LANG == "en" else "見る",
+                    key=item["page"],
+                    use_container_width=True,
+                ):
+                    st.session_state.page = item["page"]
+                    st.rerun()
 
+    st.info(t["important_note"])
 
 elif page == "Noticing Learners":
     st.title(t["noticing"])
