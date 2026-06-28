@@ -16,7 +16,7 @@ def render_conversation_support(
     # Illustration Video
     # ----------------------------------
     try:
-        st.video("assets/gentle_teacher_student_conversation.mp4")
+        st.video("assets/speak_with_care.mp4")
     except Exception:
         st.info(
             "Video not found."
