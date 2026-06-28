@@ -557,38 +557,76 @@ if page == "Home":
     st.subheader(t["home_subtitle"])
     st.markdown(t["home_intro"])
 
-    col1, col2, col3 = st.columns(3)
-    with col1:
-        card(t["notice_title"], t["notice_body"], "soft-blue")
-    with col2:
-        card(t["speak_title"], t["speak_body"], "mint")
-    with col3:
-        card(t["support_title"], t["support_body"], "peach")
+    st.markdown(
+        """
+        <style>
+        .home-card-title {
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: #162B4D;
+            margin-top: 0.8rem;
+            margin-bottom: 0.4rem;
+        }
 
-    st.info(t["important_note"])
+        .home-card-body {
+            font-size: 0.98rem;
+            line-height: 1.55;
+            color: #3F3F3F;
+            min-height: 95px;
+        }
 
-elif page == "Noticing Learners":
-    st.title(t["noticing"])
-
-    level = st.selectbox(
-        t["select_level"],
-        LEVELS,
-        format_func=lambda x: LEVEL_LABELS[LANG][x],
+        div[data-testid="stImage"] img {
+            height: 190px;
+            object-fit: cover;
+            border-radius: 16px;
+            border: 1px solid #EEE8DF;
+            background: #FFFFFF;
+        }
+        </style>
+        """,
+        unsafe_allow_html=True,
     )
 
-    st.markdown(f"### {t['what_teachers_notice']}")
-    for item in NOTICING_EXAMPLES[level][LANG]:
-        st.markdown(f"- {item}")
+    HOME_CARDS = [
+        {
+            "title": t["notice_title"],
+            "body": t["notice_body"],
+            "image": "assets/notice_without_labeling.png",
+        },
+        {
+            "title": t["speak_title"],
+            "body": t["speak_body"],
+            "image": "assets/speak_with_care.png",
+        },
+        {
+            "title": t["support_title"],
+            "body": t["support_body"],
+            "image": "assets/support_participation.png",
+        },
+    ]
 
-    st.markdown(f"### {t['what_not_to_assume']}")
-    if LANG == "en":
-        phrase_block("Avoid assuming", "The student is lazy, disrespectful, careless, or incapable.", "avoid")
-        phrase_block("Consider instead", "The student may be unsure, overwhelmed, embarrassed, masking difficulty, or needing another way to participate.", "try")
-        st.warning("What might this learner be experiencing that is not immediately visible?")
-    else:
-        phrase_block("避けたい決めつけ", "生徒が怠けている、失礼である、不注意である、能力がないと決めつけること。", "avoid")
-        phrase_block("代わりに考えたいこと", "生徒は不安、圧倒されている、恥ずかしい、困難を隠している、または別の参加方法を必要としているかもしれません。", "try")
-        st.warning("この生徒には、すぐには見えないどのような経験があるかもしれませんか？")
+    col1, col2, col3 = st.columns(3)
+
+    for col, item in zip([col1, col2, col3], HOME_CARDS):
+        with col:
+            with st.container(border=True):
+                try:
+                    st.image(
+                        item["image"],
+                        use_container_width=True,
+                    )
+                except:
+                    st.info("Image not found. Please upload it to the assets folder.")
+
+                st.markdown(
+                    f"""
+                    <div class="home-card-title">{item['title']}</div>
+                    <div class="home-card-body">{item['body']}</div>
+                    """,
+                    unsafe_allow_html=True,
+                )
+
+    st.info(t["important_note"])
 
 elif page == "Conversation Support":
     st.title(t["conversation_support"])
