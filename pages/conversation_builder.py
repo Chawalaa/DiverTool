@@ -14,18 +14,21 @@ def render_conversation_builder(
 
     st.title(t["conversation_builder"])
     st.write(t["builder_intro"])
-# ---------------------------------
-# Illustration Video
-# ---------------------------------
-try:
-    st.video("assets/support_participation.mp4")
-except Exception:
-    st.info(
-        "Video not found."
-        if LANG == "en"
-        else "動画が見つかりません。"
-    )
-st.divider()
+
+    # ---------------------------------
+    # Illustration Video
+    # ---------------------------------
+    try:
+        st.video("assets/support_participation.mp4")
+    except Exception:
+        st.info(
+            "Video not found."
+            if LANG == "en"
+            else "動画が見つかりません。"
+        )
+
+    st.divider()
+
     col1, col2 = st.columns(2)
 
     with col1:
