@@ -618,4 +618,14 @@ elif page == "Scripts by Situation":
         SCENARIO_KEYS,
         phrase_block,
     )
-
+elif page == "Conversation Builder":
+    render_conversation_builder(
+        t,
+        LANG,
+        LEVELS,
+        LEVEL_LABELS,
+        CONVERSATION_BUILDER,
+        SCENARIO_KEYS,
+        card,
+        phrase_block,
+    )
