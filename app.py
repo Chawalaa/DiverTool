@@ -562,10 +562,6 @@ page = st.sidebar.radio(
 )
 
 st.session_state.page = page
-)
-
-st.sidebar.markdown("---")
-st.sidebar.caption(t["diagnosis_note"])
 
 # -----------------------------
 # Pages
