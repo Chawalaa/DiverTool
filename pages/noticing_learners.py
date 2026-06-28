@@ -24,8 +24,7 @@ def render_noticing(
             else "動画が見つかりません。"
         )
     if LANG == "en":
-
-    st.markdown(
+        st.markdown(
         """
         <div style="
             background:#F8FAFC;
