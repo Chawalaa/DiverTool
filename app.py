@@ -552,6 +552,17 @@ page = st.sidebar.radio(
 )
 
 st.session_state.page = page
+
+if page == "Home":
+    render_home(t, LANG)
+
+elif page == "Noticing Learners":
+    render_noticing(t, LANG, LEVELS, LEVEL_LABELS, NOTICING_EXAMPLES, phrase_block)
+
+elif page == "Conversation Support":
+    render_conversation_support(t, LANG, LEVELS, LEVEL_LABELS, CONVERSATION_BUILDER, phrase_block)
+
+
 # -----------------------------
 # Pages
 # -----------------------------
