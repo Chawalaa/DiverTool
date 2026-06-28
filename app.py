@@ -9,6 +9,7 @@ from pages.teacher_reflection import render_teacher_reflection
 from pages.visual_metaphors import render_visual_metaphors
 from pages.scripts_by_situation import render_scripts
 from pages.conversation_builder import render_conversation_builder
+from pages.conversation_support import render_conversation_support
 # =====================================================
 # Culturally Responsive Teacher Communication Toolkit
 # Teacher–Student Communication Focus
@@ -627,5 +628,14 @@ elif page == "Conversation Builder":
         CONVERSATION_BUILDER,
         SCENARIO_KEYS,
         card,
+        phrase_block,
+    )
+elif page == "Conversation Support":
+    render_conversation_support(
+        t,
+        LANG,
+        LEVELS,
+        LEVEL_LABELS,
+        CONVERSATION_BUILDER,
         phrase_block,
     )
