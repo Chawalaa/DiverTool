@@ -554,7 +554,6 @@ st.sidebar.caption(t["diagnosis_note"])
 if page == "Home":
     st.title(t["app_title"])
     st.subheader(t["home_subtitle"])
-    st.markdown(t["home_intro"])
 
     st.markdown(
         """
