@@ -95,13 +95,3 @@ def render_conversation_builder(
 """,
         language="text",
     )
-# Illustration Video
-# ---------------------------------
-try:
-    st.video("assets/support_participation.mp4")
-except Exception:
-    st.info(
-        "Video not found."
-        if LANG == "en"
-        else "動画が見つかりません。"
-    )
