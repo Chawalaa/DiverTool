@@ -1,7 +1,6 @@
 import streamlit as st
 from datetime import datetime
 from pages.home import render_home
-from pages.noticing_learners import render_noticing
 # =====================================================
 # Culturally Responsive Teacher Communication Toolkit
 # Teacher–Student Communication Focus
