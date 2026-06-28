@@ -685,15 +685,6 @@ elif page == "Visual Metaphors":
     st.markdown(
         """
         <style>
-        .metaphor-card {
-            background: linear-gradient(180deg, #FFFFFF 0%, #FAF9F6 100%);
-            border: 1px solid #E7E2DA;
-            border-radius: 22px;
-            padding: 1rem;
-            box-shadow: 0 8px 26px rgba(0,0,0,0.06);
-            min-height: 470px;
-        }
-
         .metaphor-title {
             font-size: 1.45rem;
             font-weight: 800;
@@ -712,6 +703,7 @@ elif page == "Visual Metaphors":
         .metaphor-tag {
             display: inline-block;
             margin-top: 0.5rem;
+            margin-bottom: 0.7rem;
             padding: 0.35rem 0.7rem;
             border-radius: 999px;
             font-size: 0.82rem;
@@ -772,48 +764,40 @@ elif page == "Visual Metaphors":
 
     for col, item in zip(cols, METAPHORS):
         with col:
-            st.markdown('<div class="metaphor-card">', unsafe_allow_html=True)
-
-            try:
-                st.image(item["image"], use_container_width=True)
-            except:
-                st.info(
-                    "Image not found. Please upload it to the assets folder."
-                    if LANG == "en"
-                    else "画像が見つかりません。assets フォルダにアップロードしてください。"
-                )
-
-            title = item["title_ja"] if LANG == "ja" else item["title_en"]
-            body = item["body_ja"] if LANG == "ja" else item["body_en"]
-            tag = item["tag_ja"] if LANG == "ja" else item["tag_en"]
-            example = item["example_ja"] if LANG == "ja" else item["example_en"]
-
-            st.markdown(
-                f"""
-                <div class="metaphor-title">{title}</div>
-                <div class="metaphor-body">{body}</div>
-                <span class="metaphor-tag">{tag}</span>
-                """,
-                unsafe_allow_html=True,
-            )
-
             with st.container(border=True):
+                title = item["title_ja"] if LANG == "ja" else item["title_en"]
+                body = item["body_ja"] if LANG == "ja" else item["body_en"]
+                tag = item["tag_ja"] if LANG == "ja" else item["tag_en"]
+                example = item["example_ja"] if LANG == "ja" else item["example_en"]
 
-    st.image(
-        item["image"],
-        use_container_width=True,
-    )
+                try:
+                    st.image(
+                        item["image"],
+                        use_container_width=True,
+                    )
+                except:
+                    st.info(
+                        "Image not found. Please upload it to the assets folder."
+                        if LANG == "en"
+                        else "画像が見つかりません。assets フォルダにアップロードしてください。"
+                    )
 
-    st.markdown(f"### {title}")
-    st.write(body)
-
-    with st.expander("View"):
-        st.write(example)
-                st.write(
-                    "Use this metaphor to talk about difference gently, without ranking students or using diagnostic language."
-                    if LANG == "en"
-                    else "生徒を比較したり、診断的な言葉を使ったりせずに、違いについてやわらかく話すときに使います。"
+                st.markdown(
+                    f"""
+                    <div class="metaphor-title">{title}</div>
+                    <div class="metaphor-body">{body}</div>
+                    <span class="metaphor-tag">{tag}</span>
+                    """,
+                    unsafe_allow_html=True,
                 )
+
+                with st.expander("詳しく見る" if LANG == "ja" else "View"):
+                    st.write(example)
+                    st.write(
+                        "Use this metaphor to talk about difference gently, without ranking students or using diagnostic language."
+                        if LANG == "en"
+                        else "生徒を比較したり、診断的な言葉を使ったりせずに、違いについてやわらかく話すときに使います。"
+                    )
 
     st.info(
         "Avoid brain images, diagnostic icons, warning colors, and visuals that suggest normal versus abnormal learners."
