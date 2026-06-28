@@ -676,26 +676,49 @@ elif page == "Scripts by Situation":
 elif page == "Visual Metaphors":
     st.title(t["visual_metaphors"])
 
-    if LANG == "en":
-        st.write("These metaphors help explain difference without using diagnostic or medical language.")
-        col1, col2, col3 = st.columns(3)
-        with col1:
-            card("Dots", "Different learners may connect ideas, people, and classroom activities in different ways.", "soft-blue")
-        with col2:
-            card("Waves", "Energy, attention, confidence, and communication can change from day to day.", "mint")
-        with col3:
-            card("Pathways", "Learners may reach understanding through different routes.", "lavender")
-        st.info("Avoid brain images, diagnostic icons, warning colors, and visuals that suggest normal versus abnormal learners.")
-    else:
-        st.write("これらのメタファーは、診断的・医療的な言葉を使わずに違いを説明するためのものです。")
-        col1, col2, col3 = st.columns(3)
-        with col1:
-            card("Dots", "学習者は、考え、人、教室活動をそれぞれ異なる方法でつなげることがあります。", "soft-blue")
-        with col2:
-            card("Waves", "エネルギー、注意、安心感、コミュニケーションは日によって変化することがあります。", "mint")
-        with col3:
-            card("Pathways", "学習者は、それぞれ異なる道筋で理解にたどり着くことがあります。", "lavender")
-        st.info("脳の画像、診断を連想させるアイコン、警告色、正常／異常を示すような表現は避けます。")
+    METAPHORS = [
+        {
+            "title_en": "Dots",
+            "title_ja": "Dots",
+            "body_en": "Different learners may connect ideas, people, and classroom activities in different ways.",
+            "body_ja": "学習者は、考え、人、教室活動をそれぞれ異なる方法でつなげることがあります。",
+            "image": "assets/dots.png",
+        },
+        {
+            "title_en": "Waves",
+            "title_ja": "Waves",
+            "body_en": "Energy, attention, confidence, and communication can change from day to day.",
+            "body_ja": "エネルギー、注意、安心感、コミュニケーションは日によって変化することがあります。",
+            "image": "assets/waves.png",
+        },
+        {
+            "title_en": "Pathways",
+            "title_ja": "Pathways",
+            "body_en": "Learners may reach understanding through different routes.",
+            "body_ja": "学習者は、それぞれ異なる道筋で理解にたどり着くことがあります。",
+            "image": "assets/pathways.png",
+        },
+    ]
+
+    col1, col2, col3 = st.columns(3)
+
+    for col, item in zip([col1, col2, col3], METAPHORS):
+        with col:
+            try:
+                st.image(item["image"], use_container_width=True)
+            except:
+                st.info("Image not found.")
+
+            title = item["title_ja"] if LANG == "ja" else item["title_en"]
+            body = item["body_ja"] if LANG == "ja" else item["body_en"]
+
+            st.markdown(f"### {title}")
+            st.write(body)
+
+            st.button(
+                "詳しく見る" if LANG == "ja" else "View",
+                key=f"view_{title}"
+            )
 
 elif page == "Quick Classroom Tools":
     st.title(t["quick_tools"])
