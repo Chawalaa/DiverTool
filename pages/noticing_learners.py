@@ -52,48 +52,98 @@ def render_noticing(
             else "動画が見つかりません。"
         )
 
+    st.markdown(
+        """
+        <style>
+        .hero-box{
+            background:#FFFFFF;
+            border:1px solid #ECECEC;
+            border-radius:22px;
+            padding:30px;
+            margin-top:10px;
+            margin-bottom:25px;
+            box-shadow:0 8px 24px rgba(0,0,0,0.06);
+        }
+
+        .hero-title{
+            font-size:1.7rem;
+            font-weight:800;
+            color:#16324F;
+            margin-bottom:12px;
+        }
+
+        .hero-body{
+            font-size:1.08rem;
+            line-height:1.8;
+            color:#555555;
+        }
+
+        .hero-highlight{
+            color:#3A78B5;
+            font-weight:700;
+        }
+        </style>
+        """,
+        unsafe_allow_html=True,
+    )
+
     if LANG == "en":
         st.markdown(
             """
-            <div style="
-                background:#F8FAFC;
-                border-left:6px solid #9FD3F5;
-                padding:18px;
-                border-radius:12px;
-                margin-top:18px;
-                margin-bottom:10px;
-            ">
-                <h4 style="margin-top:0;color:#16324F;">
+            <div class="hero-box">
+
+                <div class="hero-title">
                     👀 Notice First. Interpret Later.
-                </h4>
-                <p style="font-size:16px; line-height:1.7;">
-                    Hidden learning and communication differences are not always immediately visible.
-                    Observe patterns over time instead of making conclusions from a single classroom moment.
-                    Use curiosity, not assumptions, as the starting point for communication.
-                </p>
+                </div>
+
+                <div class="hero-body">
+                    Hidden learning and communication differences are not always
+                    immediately visible.
+
+                    <br><br>
+
+                    Rather than drawing conclusions from a single classroom moment,
+                    observe patterns over time, consider the learning environment,
+                    and remain curious about what may not yet be visible.
+
+                    <br><br>
+
+                    Inclusive communication begins with careful observation rather
+                    than assumptions.
+                </div>
+
             </div>
             """,
             unsafe_allow_html=True,
         )
+
     else:
         st.markdown(
             """
-            <div style="
-                background:#F8FAFC;
-                border-left:6px solid #9FD3F5;
-                padding:18px;
-                border-radius:12px;
-                margin-top:18px;
-                margin-bottom:10px;
-            ">
-                <h4 style="margin-top:0;color:#16324F;">
+            <div class="hero-box">
+
+                <div class="hero-title">
                     👀 まず気づき、あとで考える
-                </h4>
-                <p style="font-size:16px; line-height:1.7;">
-                    学びやコミュニケーションの違いは、すぐには見えないことがあります。
-                    一度の様子だけで判断せず、時間をかけて様子を見ながら、
-                    決めつけではなく理解につながる対話を大切にしましょう。
-                </p>
+                </div>
+
+                <div class="hero-body">
+                    学びやコミュニケーションの違いは、
+                    すぐには見えないことがあります。
+
+                    <br><br>
+
+                    一度の様子だけで判断するのではなく、
+                    時間をかけて観察し、
+                    学習環境や背景を考えながら、
+                    見えていない可能性にも目を向けます。
+
+                    <br><br>
+
+                    インクルーシブな対話は、
+                    決めつけではなく、
+                    丁寧な気づきから始まります。
+                </div>
+
             </div>
             """,
             unsafe_allow_html=True,
