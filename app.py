@@ -1,6 +1,7 @@
 import streamlit as st
 from datetime import datetime
 from pages.home import render_home
+from pages.feedback import render_feedback
 from pages.about_the_research import render_about_the_research
 # =====================================================
 # Culturally Responsive Teacher Communication Toolkit
