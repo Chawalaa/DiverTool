@@ -602,7 +602,9 @@ elif page == "Scenario Practice":
         phrase_block,
     )
 elif page == "Teacher Reflection":
-    render_teacher_reflection(t, LANG)   
-
+    render_teacher_reflection(t, LANG)
+    
+elif page == "Visual Metaphors":
+    render_visual_metaphors(t, LANG)
 
 
