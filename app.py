@@ -676,6 +676,11 @@ elif page == "Scripts by Situation":
 elif page == "Visual Metaphors":
     st.title(t["visual_metaphors"])
 
+    if LANG == "en":
+        st.write("These metaphors help explain difference without using diagnostic or medical language.")
+    else:
+        st.write("これらのメタファーは、診断的・医療的な言葉を使わずに違いを説明するためのものです。")
+
     METAPHORS = [
         {
             "title_en": "Dots",
@@ -700,26 +705,84 @@ elif page == "Visual Metaphors":
         },
     ]
 
-    col1, col2, col3 = st.columns(3)
+    # Card styling
+    st.markdown(
+        """
+        <style>
+        .metaphor-card {
+            background: #FFFFFF;
+            border: 1px solid #E7E2DA;
+            border-radius: 18px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 18px rgba(0,0,0,0.035);
+            min-height: 430px;
+        }
 
-    for col, item in zip([col1, col2, col3], METAPHORS):
+        .metaphor-image-box {
+            height: 180px;
+            overflow: hidden;
+            border-radius: 14px;
+            background: #FAF9F6;
+            margin-bottom: 1rem;
+        }
+
+        .metaphor-image-box img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .metaphor-title {
+            font-size: 1.35rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #2F2F2F;
+        }
+
+        .metaphor-body {
+            color: #4A4A4A;
+            font-size: 0.98rem;
+            line-height: 1.55;
+            min-height: 100px;
+        }
+        </style>
+        """,
+        unsafe_allow_html=True,
+    )
+
+    cols = st.columns(3)
+
+    for col, item in zip(cols, METAPHORS):
         with col:
-            try:
-                st.image(item["image"], use_container_width=True)
-            except:
-                st.info("Image not found.")
-
             title = item["title_ja"] if LANG == "ja" else item["title_en"]
             body = item["body_ja"] if LANG == "ja" else item["body_en"]
 
-            st.markdown(f"### {title}")
-            st.write(body)
+            st.markdown(
+                f"""
+                <div class="metaphor-card">
+                    <div class="metaphor-image-box">
+                        <img src="{item['image']}" alt="{title}">
+                    </div>
+                    <div class="metaphor-title">{title}</div>
+                    <div class="metaphor-body">{body}</div>
+                </div>
+                """,
+                unsafe_allow_html=True,
+            )
 
             st.button(
                 "詳しく見る" if LANG == "ja" else "View",
-                key=f"view_{title}"
+                key=f"view_{title}",
+                use_container_width=True,
             )
 
+    st.info(
+        "Avoid brain images, diagnostic icons, warning colors, and visuals that suggest normal versus abnormal learners."
+        if LANG == "en"
+        else "脳の画像、診断を連想させるアイコン、警告色、正常／異常を示すような表現は避けます。"
+    )
 elif page == "Quick Classroom Tools":
     st.title(t["quick_tools"])
 
