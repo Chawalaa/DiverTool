@@ -652,7 +652,19 @@ if page == "Home":
 
 elif page == "Noticing Learners":
     st.title(t["noticing"])
+# ---------------------------------
+# Illustration Video
+# ---------------------------------
+try:
+    st.video("assets/noticing_without_labeling.mp4")
+except:
+    st.info(
+        "Video not found."
+        if LANG == "en"
+        else "動画が見つかりません。"
+    )
 
+st.divider()
     level = st.selectbox(
         t["select_level"],
         LEVELS,
