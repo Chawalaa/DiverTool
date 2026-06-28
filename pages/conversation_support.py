@@ -74,11 +74,6 @@ def render_conversation_support(
             else "動画が見つかりません。"
         )
 
-    if LANG == "en":
-        hero_box("💬 Connection Before Correction.")
-    else:
-        hero_box("💬 まずつながり、そのあと支援")
-
     st.divider()
 
     level = st.selectbox(
