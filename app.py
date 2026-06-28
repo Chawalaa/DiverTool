@@ -570,7 +570,13 @@ if page == "Home":
 
     st.title(t["app_title"])
     st.subheader(t["home_subtitle"])
-    st.write(t["home_intro"])
+
+    st.write(
+        t.get(
+            "home_intro",
+            "This toolkit helps teachers prepare careful, respectful, and low-pressure conversations with students."
+        )
+    )
 
     st.markdown(
         """
@@ -624,32 +630,30 @@ if page == "Home":
     cols = st.columns(3)
 
     for col, item in zip(cols, HOME_CARDS):
-
         with col:
-
             with st.container(border=True):
 
-                st.image(
-                    item["image"],
-                    use_container_width=True,
-                )
+                try:
+                    st.image(
+                        item["image"],
+                        use_container_width=True,
+                    )
+                except:
+                    st.info(
+                        "Image not found. Please upload it to the assets folder."
+                    )
 
                 st.markdown(
                     f"""
-                    <div class="home-card-title">
-                        {item['title']}
-                    </div>
-
-                    <div class="home-card-body">
-                        {item['body']}
-                    </div>
+                    <div class="home-card-title">{item['title']}</div>
+                    <div class="home-card-body">{item['body']}</div>
                     """,
                     unsafe_allow_html=True,
                 )
 
                 if st.button(
                     "Explore" if LANG == "en" else "見る",
-                    key=item["page"],
+                    key=f"home_{item['page']}",
                     use_container_width=True,
                 ):
                     st.session_state.page = item["page"]
