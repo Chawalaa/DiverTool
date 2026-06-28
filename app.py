@@ -678,7 +678,7 @@ for item in NOTICING_EXAMPLES[level][LANG]:
 
 st.markdown(f"### {t['what_not_to_assume']}")
 
-    if LANG == "en":
+if LANG == "en":
         phrase_block(
             "Avoid assuming",
             "The student is lazy, disrespectful, careless, or incapable.",
