@@ -35,7 +35,6 @@ def autoplay_video(video_path):
 def render_home(t, LANG):
 
     st.title(t["app_title"])
-    st.subheader(t["home_subtitle"])
 
     try:
         autoplay_video("assets/dots_intro.mp4")
