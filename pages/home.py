@@ -2,11 +2,7 @@ import streamlit as st
 import base64
 
 
-# ---------------------------------------------------
-# Autoplay Video: Home Page Only
-# ---------------------------------------------------
 def autoplay_video(video_path):
-
     with open(video_path, "rb") as video_file:
         video_bytes = video_file.read()
 
@@ -14,35 +10,28 @@ def autoplay_video(video_path):
 
     st.markdown(
         f"""
-        <video
-            autoplay
-            loop
-            muted
-            playsinline
-            controlslist="nodownload nofullscreen noremoteplayback"
-            style="
-                width:85%;
-                max-height:380px;
-                display:block;
-                margin:auto;
-                object-fit:cover;
-                border-radius:20px;
-                overflow:hidden;
-                box-shadow:0 6px 20px rgba(0,0,0,0.08);
-                margin-bottom:20px;
-            ">
-            <source
-                src="data:video/mp4;base64,{video_base64}"
-                type="video/mp4">
-        </video>
+        <div style="width:100%;">
+            <video
+                autoplay
+                loop
+                muted
+                playsinline
+                style="
+                    width:100%;
+                    max-height:380px;
+                    object-fit:cover;
+                    border-radius:20px;
+                    box-shadow:0 6px 20px rgba(0,0,0,0.08);
+                    margin-bottom:20px;
+                ">
+                <source src="data:video/mp4;base64,{video_base64}" type="video/mp4">
+            </video>
+        </div>
         """,
         unsafe_allow_html=True,
     )
 
 
-# ---------------------------------------------------
-# Home Page
-# ---------------------------------------------------
 def render_home(t, LANG):
 
     st.title(t["app_title"])
@@ -57,27 +46,37 @@ def render_home(t, LANG):
             else "動画が見つかりません。"
         )
 
-    if LANG == "en":
-        st.info(
-            "Welcome to the DOTS Toolkit. Explore practical communication strategies that help teachers notice learner needs, communicate with care, and support participation in culturally responsive ways."
-        )
-    else:
-        st.info(
-            "DOTSツールキットへようこそ。学習者のニーズに気づき、思いやりをもって対話し、文化的に配慮した形で参加を支えるための実践的なコミュニケーション方法を紹介します。"
-        )
-
-    st.write(
-        t.get(
-            "home_intro",
-            "This toolkit helps teachers prepare careful, respectful, and low-pressure conversations with students."
-        )
-    )
-
-    st.divider()
-
     st.markdown(
         """
         <style>
+        .hero-box{
+            background:#FFFFFF;
+            border:1px solid #ECECEC;
+            border-radius:22px;
+            padding:30px;
+            margin-top:10px;
+            margin-bottom:25px;
+            box-shadow:0 8px 24px rgba(0,0,0,0.06);
+        }
+
+        .hero-title{
+            font-size:1.7rem;
+            font-weight:800;
+            color:#16324F;
+            margin-bottom:12px;
+        }
+
+        .hero-body{
+            font-size:1.08rem;
+            line-height:1.8;
+            color:#555555;
+        }
+
+        .hero-highlight{
+            color:#3A78B5;
+            font-weight:700;
+        }
+
         .home-card-title{
             font-size:1.35rem;
             font-weight:800;
@@ -90,7 +89,7 @@ def render_home(t, LANG):
             font-size:1rem;
             line-height:1.6;
             color:#555555;
-            min-height:90px;
+            min-height:95px;
         }
 
         div[data-testid="stImage"] img{
@@ -103,6 +102,55 @@ def render_home(t, LANG):
         """,
         unsafe_allow_html=True,
     )
+
+    if LANG == "en":
+        st.markdown(
+            """
+            <div class="hero-box">
+                <div class="hero-title">Welcome to the DOTS Toolkit</div>
+                <div class="hero-body">
+                    DOTS is a communication toolkit designed to help teachers
+                    <span class="hero-highlight">notice learner needs</span>,
+                    <span class="hero-highlight">communicate with care</span>,
+                    and <span class="hero-highlight">support participation</span>
+                    without relying on diagnostic labels.
+
+                    <br><br>
+
+                    Grounded in research conducted in Japanese schools, the toolkit
+                    provides practical language, visual metaphors, classroom tools,
+                    and conversation guidance that promote culturally responsive and
+                    emotionally safe teacher–student communication.
+                </div>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+    else:
+        st.markdown(
+            """
+            <div class="hero-box">
+                <div class="hero-title">DOTSツールキットへようこそ</div>
+                <div class="hero-body">
+                    DOTSは、教師が
+                    <span class="hero-highlight">学習者のニーズに気づき</span>、
+                    <span class="hero-highlight">思いやりをもって対話し</span>、
+                    <span class="hero-highlight">参加を支える</span>
+                    ためのコミュニケーションツールキットです。
+
+                    <br><br>
+
+                    日本の学校で行われた研究をもとに設計されており、
+                    教師と生徒の文化的に配慮した対話を支えるための
+                    実践的な言葉づかい、視覚メタファー、
+                    教室ツール、コミュニケーションガイドを提供します。
+                </div>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+
+    st.divider()
 
     HOME_CARDS = [
         {
@@ -130,12 +178,8 @@ def render_home(t, LANG):
     for col, item in zip(cols, HOME_CARDS):
         with col:
             with st.container(border=True):
-
                 try:
-                    st.image(
-                        item["image"],
-                        use_container_width=True,
-                    )
+                    st.image(item["image"], use_container_width=True)
                 except Exception:
                     st.info(
                         "Image not found."
@@ -145,13 +189,8 @@ def render_home(t, LANG):
 
                 st.markdown(
                     f"""
-                    <div class="home-card-title">
-                        {item["title"]}
-                    </div>
-
-                    <div class="home-card-body">
-                        {item["body"]}
-                    </div>
+                    <div class="home-card-title">{item["title"]}</div>
+                    <div class="home-card-body">{item["body"]}</div>
                     """,
                     unsafe_allow_html=True,
                 )
