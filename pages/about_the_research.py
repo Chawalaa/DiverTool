@@ -1,4 +1,7 @@
-elif page == "About the Research":
+import streamlit as st
+
+def render_about_the_research(t, LANG):
+
     st.title(t["about"])
 
     if LANG == "en":
@@ -26,6 +29,7 @@ elif page == "About the Research":
             - Use visual metaphors without medical or deficit-based imagery.
             """
         )
+
     else:
         st.markdown(
             """
@@ -50,4 +54,3 @@ elif page == "About the Research":
         )
 
     st.info(t["important_note"])
-
