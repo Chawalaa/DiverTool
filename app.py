@@ -64,7 +64,6 @@ TEXT = {
         "feedback": "Feedback",
         "about": "About the Research",
         "app_title": "DOTS Toolkit",
-        "home_subtitle": "For supporting teacher–student conversations",
         "notice_title": "Notice without labeling",
         "notice_body": "Recognize possible learning or communication needs without rushing to diagnosis.",
         "speak_title": "Speak with care",
