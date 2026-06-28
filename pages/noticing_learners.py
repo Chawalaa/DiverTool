@@ -30,7 +30,7 @@ def autoplay_video(video_path):
     )
 
 
-def hero_box(title, body):
+def hero_box(title):
     st.markdown(
         f"""
         <div style="
@@ -44,21 +44,11 @@ def hero_box(title, body):
         ">
             <h2 style="
                 color:#16324F;
-                margin-top:0;
-                margin-bottom:18px;
+                margin:0;
                 font-size:1.7rem;
             ">
                 {title}
             </h2>
-
-            <p style="
-                color:#555555;
-                font-size:1.08rem;
-                line-height:1.8;
-                margin-bottom:0;
-            ">
-                {body}
-            </p>
         </div>
         """,
         unsafe_allow_html=True,
@@ -86,13 +76,9 @@ def render_noticing(
         )
 
     if LANG == "en":
-        hero_box(
-            "Notice First. Interpret Later.",
-        )
+        hero_box("👀 Notice First. Interpret Later.")
     else:
-        hero_box(
-            "まず気づき、あとで考える",
-        )
+        hero_box("👀 まず気づき、あとで考える")
 
     st.divider()
 
