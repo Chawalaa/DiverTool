@@ -113,9 +113,6 @@ def render_home(t, LANG):
                     <span class="hero-highlight">communicate with care</span>,
                     and <span class="hero-highlight">support participation</span>
                     without relying on diagnostic labels.
-
-                    <br><br>
-
             </div>
             """,
             unsafe_allow_html=True,
