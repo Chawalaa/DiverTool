@@ -3,7 +3,29 @@ import streamlit as st
 def render_home(t, LANG):
     st.title(t["app_title"])
     st.subheader(t["home_subtitle"])
+st.title(t["app_title"])
+st.subheader(t["home_subtitle"])
 
+# ---------------------------------
+# DOTS Intro Video
+# ---------------------------------
+try:
+    st.video("assets/dots_intro.mp4")
+except Exception:
+    st.info(
+        "Video not found."
+        if LANG == "en"
+        else "動画が見つかりません。"
+    )
+
+st.write(
+    t.get(
+        "home_intro",
+        "This toolkit helps teachers prepare careful, respectful, and low-pressure conversations with students."
+    )
+)
+
+st.divider()
     st.write(
         t.get(
             "home_intro",
