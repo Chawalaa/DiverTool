@@ -3,6 +3,7 @@ from datetime import datetime
 from pages.home import render_home
 from pages.feedback import render_feedback
 from pages.about_the_research import render_about_the_research
+from pages.quick_classroom_tools import render_quick_classroom_tools
 # =====================================================
 # Culturally Responsive Teacher Communication Toolkit
 # Teacher–Student Communication Focus
