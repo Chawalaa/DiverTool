@@ -1,6 +1,7 @@
 import streamlit as st
 import base64
 
+
 def render_quick_tools(t, LANG):
 
     st.title(t["quick_tools"])
@@ -38,47 +39,62 @@ def render_quick_tools(t, LANG):
         st.write(description)
 
         try:
-            with open(doc["file"], "rb") as file:
-                pdf_bytes = file.read()
+
+            with open(doc["file"], "rb") as pdf_file:
+                pdf_bytes = pdf_file.read()
 
             col1, col2 = st.columns(2)
 
+            # -------------------
+            # Download Button
+            # -------------------
             with col1:
+
                 st.download_button(
-                    label="PDFをダウンロード" if LANG == "ja" else "Download PDF",
+                    label="📥 PDFをダウンロード"
+                    if LANG == "ja"
+                    else "📥 Download PDF",
                     data=pdf_bytes,
                     file_name=doc["file"].split("/")[-1],
                     mime="application/pdf",
                     key=f"download_{doc['file']}",
+                    use_container_width=True,
                 )
 
+            # -------------------
+            # View Button
+            # -------------------
             with col2:
-                base64_pdf = base64.b64encode(pdf_bytes).decode("utf-8")
+
+                pdf_base64 = base64.b64encode(pdf_bytes).decode()
 
                 st.markdown(
                     f"""
-                    <a href="data:application/pdf;base64,{base64_pdf}"
-                       target="_blank"
-                       style="
-                            display:inline-block;
-                            padding:0.5rem 1rem;
-                            background-color:#DCEEFF;
-                            border-radius:8px;
+                    <a
+                        href="data:application/pdf;base64,{pdf_base64}"
+                        target="_blank"
+                        style="
+                            display:block;
+                            text-align:center;
+                            padding:0.65rem;
+                            background:#DCEEFF;
+                            color:#000000;
+                            border-radius:10px;
                             text-decoration:none;
-                            color:black;
                             font-weight:600;
-                       ">
-                        {"PDFを見る" if LANG == "ja" else "View PDF"}
+                        ">
+                        {"👁 View PDF" if LANG == "en" else "👁 PDFを見る"}
                     </a>
                     """,
                     unsafe_allow_html=True,
                 )
 
         except FileNotFoundError:
-            st.warning(
-                f"ファイルが見つかりません: {doc['file']}"
-                if LANG == "ja"
-                else f"File not found: {doc['file']}"
+
+            st.error(
+                f"File not found: {doc['file']}"
+                if LANG == "en"
+                else f"ファイルが見つかりません: {doc['file']}"
             )
 
-        st.markdown("---")
+        st.divider()
