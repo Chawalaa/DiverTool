@@ -116,11 +116,6 @@ def render_home(t, LANG):
 
                     <br><br>
 
-                    Grounded in research conducted in Japanese schools, the toolkit
-                    provides practical language, visual metaphors, classroom tools,
-                    and conversation guidance that promote culturally responsive and
-                    emotionally safe teacher–student communication.
-                </div>
             </div>
             """,
             unsafe_allow_html=True,
