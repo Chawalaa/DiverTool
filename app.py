@@ -640,3 +640,12 @@ elif page == "Conversation Support":
         CONVERSATION_BUILDER,
         phrase_block,
     )
+elif page == "Noticing Learners":
+    render_noticing(
+        t,
+        LANG,
+        LEVELS,
+        LEVEL_LABELS,
+        NOTICING_EXAMPLES,
+        phrase_block,
+    )
