@@ -8,6 +8,7 @@ from pages.scenario_practice import render_scenario_practice
 from pages.teacher_reflection import render_teacher_reflection
 from pages.visual_metaphors import render_visual_metaphors
 from pages.scripts_by_situation import render_scripts
+from pages.conversation_builder import render_conversation_builder
 # =====================================================
 # Culturally Responsive Teacher Communication Toolkit
 # Teacher–Student Communication Focus
