@@ -10,6 +10,7 @@ from pages.visual_metaphors import render_visual_metaphors
 from pages.scripts_by_situation import render_scripts
 from pages.conversation_builder import render_conversation_builder
 from pages.conversation_support import render_conversation_support
+from pages.noticing_learners import render_noticing
 # =====================================================
 # Culturally Responsive Teacher Communication Toolkit
 # Teacher–Student Communication Focus
