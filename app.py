@@ -755,28 +755,29 @@ elif page == "Visual Metaphors":
     cols = st.columns(3)
 
     for col, item in zip(cols, METAPHORS):
-        with col:
-            title = item["title_ja"] if LANG == "ja" else item["title_en"]
-            body = item["body_ja"] if LANG == "ja" else item["body_en"]
+    with col:
 
-            st.markdown(
-                f"""
-                <div class="metaphor-card">
-                    <div class="metaphor-image-box">
-                        <img src="{item['image']}" alt="{title}">
-                    </div>
-                    <div class="metaphor-title">{title}</div>
-                    <div class="metaphor-body">{body}</div>
-                </div>
-                """,
-                unsafe_allow_html=True,
-            )
+        title = item["title_ja"] if LANG == "ja" else item["title_en"]
+        body = item["body_ja"] if LANG == "ja" else item["body_en"]
 
-            st.button(
-                "詳しく見る" if LANG == "ja" else "View",
-                key=f"view_{title}",
-                use_container_width=True,
-            )
+        # Image
+        st.image(
+            item["image"],
+            use_container_width=True,
+        )
+
+        # Title
+        st.markdown(f"### {title}")
+
+        # Description
+        st.write(body)
+
+        # Button
+        st.button(
+            "詳しく見る" if LANG == "ja" else "View",
+            key=f"view_{title}",
+            use_container_width=True,
+        )
 
     st.info(
         "Avoid brain images, diagnostic icons, warning colors, and visuals that suggest normal versus abnormal learners."
