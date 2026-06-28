@@ -688,8 +688,6 @@ elif page == "Visual Metaphors":
             "body_en": "Different learners may connect ideas, people, and classroom activities in different ways.",
             "body_ja": "学習者は、考え、人、教室活動をそれぞれ異なる方法でつなげることがあります。",
             "image": "assets/dots.png",
-            "example_en": "Use this when explaining that students connect with learning, people, and classroom tasks differently.",
-            "example_ja": "学習者が学び、人、教室活動とそれぞれ異なる形でつながることを説明するときに使います。",
         },
         {
             "title_en": "Waves",
@@ -697,8 +695,6 @@ elif page == "Visual Metaphors":
             "body_en": "Energy, attention, confidence, and communication can change from day to day.",
             "body_ja": "エネルギー、注意、安心感、コミュニケーションは日によって変化することがあります。",
             "image": "assets/waves.png",
-            "example_en": "Use this when explaining that participation and confidence may fluctuate across different days or situations.",
-            "example_ja": "参加のしやすさや安心感が、日や状況によって変化することを説明するときに使います。",
         },
         {
             "title_en": "Pathways",
@@ -706,10 +702,55 @@ elif page == "Visual Metaphors":
             "body_en": "Learners may reach understanding through different routes.",
             "body_ja": "学習者は、それぞれ異なる道筋で理解にたどり着くことがあります。",
             "image": "assets/pathways.png",
-            "example_en": "Use this when explaining that students may need different routes to show understanding.",
-            "example_ja": "学習者が理解を示すまでに、それぞれ異なる道筋を必要とすることを説明するときに使います。",
         },
     ]
+
+    # Card styling
+    st.markdown(
+        """
+        <style>
+        .metaphor-card {
+            background: #FFFFFF;
+            border: 1px solid #E7E2DA;
+            border-radius: 18px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 18px rgba(0,0,0,0.035);
+            min-height: 430px;
+        }
+
+        .metaphor-image-box {
+            height: 180px;
+            overflow: hidden;
+            border-radius: 14px;
+            background: #FAF9F6;
+            margin-bottom: 1rem;
+        }
+
+        .metaphor-image-box img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .metaphor-title {
+            font-size: 1.35rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #2F2F2F;
+        }
+
+        .metaphor-body {
+            color: #4A4A4A;
+            font-size: 0.98rem;
+            line-height: 1.55;
+            min-height: 100px;
+        }
+        </style>
+        """,
+        unsafe_allow_html=True,
+    )
 
     cols = st.columns(3)
 
@@ -717,32 +758,25 @@ elif page == "Visual Metaphors":
         with col:
             title = item["title_ja"] if LANG == "ja" else item["title_en"]
             body = item["body_ja"] if LANG == "ja" else item["body_en"]
-            example = item["example_ja"] if LANG == "ja" else item["example_en"]
 
-            try:
-                st.image(
-                    item["image"],
-                    use_container_width=True,
-                )
-            except:
-                st.info(
-                    "Image not found. Please upload it to the assets folder."
-                    if LANG == "en"
-                    else "画像が見つかりません。assets フォルダにアップロードしてください。"
-                )
+            st.markdown(
+                f"""
+                <div class="metaphor-card">
+                    <div class="metaphor-image-box">
+                        <img src="{item['image']}" alt="{title}">
+                    </div>
+                    <div class="metaphor-title">{title}</div>
+                    <div class="metaphor-body">{body}</div>
+                </div>
+                """,
+                unsafe_allow_html=True,
+            )
 
-            st.markdown(f"### {title}")
-            st.write(body)
-
-            with st.expander("詳しく見る" if LANG == "ja" else "View"):
-                st.write(example)
-
-                if LANG == "en":
-                    st.markdown("**Classroom use:**")
-                    st.write("Use this metaphor when speaking gently about differences without ranking students or using diagnostic language.")
-                else:
-                    st.markdown("**教室での使い方：**")
-                    st.write("生徒を比較したり、診断的な言葉を使ったりせずに、違いについてやわらかく話すときに使います.")
+            st.button(
+                "詳しく見る" if LANG == "ja" else "View",
+                key=f"view_{title}",
+                use_container_width=True,
+            )
 
     st.info(
         "Avoid brain images, diagnostic icons, warning colors, and visuals that suggest normal versus abnormal learners."
