@@ -797,10 +797,18 @@ elif page == "Visual Metaphors":
                 unsafe_allow_html=True,
             )
 
-            st.markdown("</div>", unsafe_allow_html=True)
+            with st.container(border=True):
 
-            with st.expander("詳しく見る" if LANG == "ja" else "View"):
-                st.write(example)
+    st.image(
+        item["image"],
+        use_container_width=True,
+    )
+
+    st.markdown(f"### {title}")
+    st.write(body)
+
+    with st.expander("View"):
+        st.write(example)
                 st.write(
                     "Use this metaphor to talk about difference gently, without ranking students or using diagnostic language."
                     if LANG == "en"
