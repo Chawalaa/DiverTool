@@ -561,6 +561,10 @@ elif page == "Noticing Learners":
 
 elif page == "Conversation Support":
     render_conversation_support(t, LANG, LEVELS, LEVEL_LABELS, CONVERSATION_BUILDER, phrase_block)
+    
+from pages.home import render_home
+
+
 
 
 # -----------------------------
