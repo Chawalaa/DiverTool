@@ -12,6 +12,9 @@ def render_noticing(
 
     st.title(t["noticing"])
 
+    # ---------------------------------
+    # Illustration Video
+    # ---------------------------------
     try:
         st.video("assets/notice_without_labeling.mp4")
     except Exception:
@@ -19,56 +22,6 @@ def render_noticing(
             "Video not found."
             if LANG == "en"
             else "動画が見つかりません。"
-        )
-
-    if LANG == "en":
-        st.markdown(
-            """
-            <div style="
-                background:#F8FAFC;
-                border-left:6px solid #9FD3F5;
-                padding:18px;
-                border-radius:12px;
-                margin-top:18px;
-                margin-bottom:10px;
-            ">
-                <h4 style="margin-top:0;color:#16324F;">
-                    👀 Notice First. Interpret Later.
-                </h4>
-
-                <p style="font-size:16px; line-height:1.7;">
-                    Hidden learning and communication differences are not always immediately visible.
-                    Observe patterns over time instead of making conclusions from a single classroom moment.
-                    Use curiosity, not assumptions, as the starting point for communication.
-                </p>
-            </div>
-            """,
-            unsafe_allow_html=True,
-        )
-
-    else:
-        st.markdown(
-            """
-            <div style="
-                background:#F8FAFC;
-                border-left:6px solid #9FD3F5;
-                padding:18px;
-                border-radius:12px;
-                margin-top:18px;
-                margin-bottom:10px;
-            ">
-                <h4 style="margin-top:0;color:#16324F;">
-                    👀 まず気づき、あとで考える
-                </h4>
-
-                <p style="font-size:16px; line-height:1.7;">
-                    学びやコミュニケーションの違いは、すぐには見えないことがあります。
-                    一度の様子だけで判断せず、時間をかけて様子を見ながら、
-                    決めつけではなく理解につながる対話を大切にしましょう。
-                </p>
-            </div>
-            """,
-            unsafe_allow_html=True,
         )
 
     st.divider()
@@ -87,6 +40,7 @@ def render_noticing(
     st.markdown(f"## {t['what_not_to_assume']}")
 
     if LANG == "en":
+
         phrase_block(
             "Avoid assuming",
             "The student is lazy, disrespectful, careless, or incapable.",
@@ -104,6 +58,7 @@ def render_noticing(
         )
 
     else:
+
         phrase_block(
             "避けたい決めつけ",
             "生徒が怠けている、失礼である、不注意である、能力がないと決めつけること。",
