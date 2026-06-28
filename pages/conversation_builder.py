@@ -93,19 +93,3 @@ def render_conversation_builder(
 
     st.markdown(f"## {t['before_speak']}")
     st.warning(t["before_speak_prompt"])
-
-    st.markdown(f"## {t['copy_ready']}")
-
-    st.code(
-        f"""{t['situation']}: {response['label'][LANG]}
-
-{t['school_level']}: {LEVEL_LABELS[LANG][level]}
-
-{t['try_saying']}: {response['try'][level][LANG]}
-
-{t['softer_version']}: {response['soft'][level][LANG]}
-
-{t['follow_up_question']}: {response['follow_up'][LANG]}
-""",
-        language="text",
-    )
