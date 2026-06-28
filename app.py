@@ -665,7 +665,7 @@ except:
     )
 
 st.divider()
-    level = st.selectbox(
+level = st.selectbox(
         t["select_level"],
         LEVELS,
         format_func=lambda x: LEVEL_LABELS[LANG][x],
