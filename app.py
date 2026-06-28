@@ -31,6 +31,8 @@ language = st.sidebar.selectbox(
 LANG = "ja" if language == "日本語" else "en"
 st.sidebar.markdown("---")
 
+if "page" not in st.session_state:
+    st.session_state.page = "Home"
 # -----------------------------
 # Text Dictionary
 # -----------------------------
@@ -539,10 +541,27 @@ PAGE_LABELS = {
     "About the Research": t["about"],
 }
 
+pages = [
+    t["home"],
+    t["noticing"],
+    t["conversation_support"],
+    t["conversation_builder"],
+    t["scripts"],
+    t["visual_metaphors"],
+    t["quick_tools"],
+    t["scenario_practice"],
+    t["reflection"],
+    t["feedback"],
+    t["about"],
+]
+
 page = st.sidebar.radio(
     t["menu"],
-    PAGE_OPTIONS,
-    format_func=lambda x: PAGE_LABELS[x],
+    pages,
+    index=pages.index(st.session_state.page),
+)
+
+st.session_state.page = page
 )
 
 st.sidebar.markdown("---")
