@@ -621,15 +621,45 @@ if page == "Home":
     col1, col2, col3 = st.columns(3)
 
     for col, item in zip([col1, col2, col3], HOME_CARDS):
-        with col:
-            with st.container(border=True):
-                try:
-                    st.image(
-                        item["image"],
-                        use_container_width=True,
-                    )
-                except:
-                    st.info("Image not found. Please upload it to the assets folder.")
+    with col:
+        with st.container(border=True):
+
+            st.image(item["image"], use_container_width=True)
+
+            st.markdown(
+                f"""
+                <div class="home-card-title">{item['title']}</div>
+                <div class="home-card-body">{item['body']}</div>
+                """,
+                unsafe_allow_html=True,
+            )
+
+            if item["title"] == t["notice_title"]:
+                if st.button(
+                    "Explore",
+                    key="home_notice",
+                    use_container_width=True,
+                ):
+                    st.session_state.page = t["noticing"]
+                    st.rerun()
+
+            elif item["title"] == t["speak_title"]:
+                if st.button(
+                    "Explore",
+                    key="home_speak",
+                    use_container_width=True,
+                ):
+                    st.session_state.page = t["conversation_support"]
+                    st.rerun()
+
+            else:
+                if st.button(
+                    "Explore",
+                    key="home_support",
+                    use_container_width=True,
+                ):
+                    st.session_state.page = t["conversation_builder"]
+                    st.rerun()
 
                 st.markdown(
                     f"""
