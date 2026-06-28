@@ -16,7 +16,7 @@ def render_noticing(
     # Illustration Video
     # ---------------------------------
     try:
-        st.video("assets/noticing_without_labeling.mp4")
+        st.video("assets/notice_without_labeling.mp4")
     except Exception:
         st.info(
             "Video not found."
