@@ -74,12 +74,6 @@ def render_noticing(
             if LANG == "en"
             else "動画が見つかりません。"
         )
-
-    if LANG == "en":
-        hero_box("Notice First. Interpret Later.")
-    else:
-        hero_box("まず気づき、あとで考える")
-
     st.divider()
 
     level = st.selectbox(
