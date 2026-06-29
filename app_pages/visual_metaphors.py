@@ -58,14 +58,13 @@ def render_visual_metaphors(t, LANG):
 
     st.title(t["visual_metaphors"])
 
-    try:
-        autoplay_video("assets/visual_metaphors.mp4")
-    except Exception:
-        st.info(
-            "Video not found."
-            if LANG == "en"
-            else "動画が見つかりません。"
-        )
+    # No try/except for now, so Streamlit shows the real error if the video fails.
+    autoplay_video("assets/visual_metaphors.mp4")
+
+    if LANG == "en":
+        hero_box("🌊 Explain Difference Without Labels.")
+    else:
+        hero_box("🌊 ラベルに頼らず、違いを伝える")
 
     st.write(
         "These metaphors help explain difference without using diagnostic or medical language."
