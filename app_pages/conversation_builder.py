@@ -88,14 +88,6 @@ def render_conversation_builder(
             else "動画が見つかりません。"
         )
 
-    # ---------------------------------------
-    # Hero Box
-    # ---------------------------------------
-    if LANG == "en":
-        hero_box("🌱 Support Participation.")
-    else:
-        hero_box("🌱 参加を支える")
-
     st.divider()
 
     # ---------------------------------------
