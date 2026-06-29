@@ -1,9 +1,71 @@
 import streamlit as st
+import base64
+
+
+def autoplay_video(video_path):
+    with open(video_path, "rb") as video_file:
+        video_bytes = video_file.read()
+
+    video_base64 = base64.b64encode(video_bytes).decode()
+
+    st.markdown(
+        f"""
+        <video
+            autoplay
+            loop
+            muted
+            playsinline
+            style="
+                width:100%;
+                max-height:380px;
+                object-fit:cover;
+                border-radius:20px;
+                box-shadow:0 6px 20px rgba(0,0,0,.08);
+                margin-bottom:20px;
+            ">
+            <source src="data:video/mp4;base64,{video_base64}" type="video/mp4">
+        </video>
+        """,
+        unsafe_allow_html=True,
+    )
+
+
+def hero_box(title):
+    st.markdown(
+        f"""
+        <div style="
+            background:white;
+            border:1px solid #ECECEC;
+            border-radius:22px;
+            padding:30px;
+            margin-bottom:25px;
+            box-shadow:0 8px 24px rgba(0,0,0,.06);
+        ">
+            <h2 style="
+                margin:0;
+                color:#16324F;
+                font-size:1.7rem;
+            ">
+                {title}
+            </h2>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
 
 
 def render_visual_metaphors(t, LANG):
 
     st.title(t["visual_metaphors"])
+
+    try:
+        autoplay_video("assets/visual_metaphors.mp4")
+    except Exception:
+        st.info(
+            "Video not found."
+            if LANG == "en"
+            else "動画が見つかりません。"
+        )
 
     st.write(
         "These metaphors help explain difference without using diagnostic or medical language."
