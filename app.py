@@ -1,16 +1,16 @@
 import streamlit as st
 from datetime import datetime
-from home import render_home
-from feedback import render_feedback
-from about_the_research import render_about_the_research
-from quick_classroom_tools import render_quick_tools
-from scenario_practice import render_scenario_practice
-from teacher_reflection import render_teacher_reflection
-from visual_metaphors import render_visual_metaphors
-from scripts_by_situation import render_scripts
-from conversation_builder import render_conversation_builder
-from conversation_support import render_conversation_support
-from noticing_learners import render_noticing
+from app_pages.home import render_home
+from app_pages.noticing_learners import render_noticing
+from app_pages.conversation_support import render_conversation_support
+from app_pages.conversation_builder import render_conversation_builder
+from app_pages.scripts_by_situation import render_scripts
+from app_pages.visual_metaphors import render_visual_metaphors
+from app_pages.quick_classroom_tools import render_quick_tools
+from app_pages.scenario_practice import render_scenario_practice
+from app_pages.teacher_reflection import render_teacher_reflection
+from app_pages.feedback import render_feedback
+from app_pages.about_the_research import render_about_the_research
 # =====================================================
 # Culturally Responsive Teacher Communication Toolkit
 # Teacher–Student Communication Focus
