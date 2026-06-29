@@ -61,11 +61,6 @@ def render_visual_metaphors(t, LANG):
     # No try/except for now, so Streamlit shows the real error if the video fails.
     autoplay_video("assets/visual_metaphors.mp4")
 
-    if LANG == "en":
-        hero_box("🌊 Explain Difference Without Labels.")
-    else:
-        hero_box("🌊 ラベルに頼らず、違いを伝える")
-
     st.write(
         "These metaphors help explain difference without using diagnostic or medical language."
         if LANG == "en"
