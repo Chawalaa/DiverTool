@@ -68,11 +68,6 @@ def render_scripts(
 
     autoplay_video("assets/scripts_by_situation.mp4")
 
-    if LANG == "en":
-        hero_box("📝 Choose Words That Protect Dignity.")
-    else:
-        hero_box("📝 尊厳を守る言葉を選ぶ")
-
     st.divider()
 
     level = st.selectbox(
