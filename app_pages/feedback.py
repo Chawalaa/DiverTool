@@ -63,11 +63,6 @@ def render_feedback(t, LANG):
 
     st.divider()
 
-    if LANG == "en":
-        st.write(
-            "This page can be used for prototype evaluation during your research."
-        )
-
         role_label = "Your role"
         usefulness = "How useful was this toolkit?"
         cultural_fit = "How appropriate was the language for Japanese school contexts?"
