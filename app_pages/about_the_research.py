@@ -9,10 +9,7 @@ def render_about_the_research(t, LANG):
             """
             This toolkit was designed as part of a research project on culturally responsive communication
             between teachers and students in Japanese school contexts.
-
-            The design responds to findings from classroom observations, teacher interviews, educator surveys,
-            interactive student design sessions, and visual metaphor activities.
-
+            The design responds to findings from classroom observations, teacher interviews, educator surveys, and expert feedback.
             The central design question is how teachers can notice and communicate about learner needs
             without creating shame, stigma, or premature labeling.
             """
@@ -33,11 +30,11 @@ def render_about_the_research(t, LANG):
     else:
         st.markdown(
             """
-            このツールキットは、日本の学校現場における教師と生徒の文化的に配慮したコミュニケーションに関する研究の一部として設計されました。
+            このツールキットは、日本の学校における教師と生徒間の「文化に対応したコミュニケーション」に関する研究プロジェクトの一環として作成されました。
 
-            設計には、教室観察、教師インタビュー、教育者アンケート、学生とのインタラクティブなデザイン活動、視覚メタファー活動から得られた知見が反映されています。
+            この設計は、教室での観察、教師へのインタビュー、教育者への調査、および専門家からのフィードバックで得られた知見に基づいています。
 
-            中心となる問いは、教師が学習者のニーズに気づき、恥ずかしさ、偏見、早すぎるラベルづけを生まずにどのように対話できるかという点です。
+            設計上の中心的な課題は、学習者のニーズに気づき、それについて対話を行う際に、いかにして恥やスティグマ、あるいは拙速なレッテル貼りを生じさせずにそれを行うか、という点にあります。
             """
         )
 
