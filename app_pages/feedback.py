@@ -30,6 +30,7 @@ def autoplay_video(video_path):
         unsafe_allow_html=True,
     )
 
+
 def hero_box(title):
     st.markdown(
         f"""
@@ -52,6 +53,7 @@ def hero_box(title):
         """,
         unsafe_allow_html=True,
     )
+
 
 def render_feedback(t, LANG):
 
