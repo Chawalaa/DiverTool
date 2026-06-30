@@ -61,7 +61,7 @@ def render_feedback(t, LANG):
 
     autoplay_video("assets/feedback.mp4")
 
-    st.divider()
+    if LANG == "en":
 
         role_label = "Your role"
         usefulness = "How useful was this toolkit?"
@@ -73,9 +73,6 @@ def render_feedback(t, LANG):
         roles = ["Teacher", "Researcher", "Student", "Other"]
 
     else:
-        st.write(
-            "このページは、研究におけるプロトタイプ評価に使用できます。"
-        )
 
         role_label = "役割"
         usefulness = "このツールキットはどのくらい役に立ちましたか？"
@@ -85,6 +82,8 @@ def render_feedback(t, LANG):
         submit = "フィードバックを送信"
         success = "ありがとうございます。フィードバックが記録されました。"
         roles = ["教師", "研究者", "学生", "その他"]
+
+    st.divider()
 
     with st.form("feedback_form"):
         st.selectbox(role_label, roles)
