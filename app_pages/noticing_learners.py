@@ -17,39 +17,14 @@ def autoplay_video(video_path):
             playsinline
             style="
                 width:100%;
-                max-height:380px;
+                max-height:360px;
                 object-fit:cover;
-                border-radius:20px;
-                box-shadow:0 6px 20px rgba(0,0,0,0.08);
-                margin-bottom:20px;
+                border-radius:24px;
+                box-shadow:0 8px 26px rgba(0,0,0,0.08);
+                margin-bottom:24px;
             ">
             <source src="data:video/mp4;base64,{video_base64}" type="video/mp4">
         </video>
-        """,
-        unsafe_allow_html=True,
-    )
-
-
-def hero_box(title):
-    st.markdown(
-        f"""
-        <div style="
-            background:#FFFFFF;
-            border:1px solid #ECECEC;
-            border-radius:22px;
-            padding:30px;
-            margin-top:15px;
-            margin-bottom:25px;
-            box-shadow:0 8px 24px rgba(0,0,0,0.06);
-        ">
-            <h2 style="
-                color:#16324F;
-                margin:0;
-                font-size:1.7rem;
-            ">
-                {title}
-            </h2>
-        </div>
         """,
         unsafe_allow_html=True,
     )
@@ -64,17 +39,141 @@ def render_noticing(
     phrase_block,
 ):
 
-    st.title(t["noticing"])
+    st.markdown(
+        """
+        <style>
+        .page-eyebrow {
+            font-size:0.9rem;
+            font-weight:700;
+            letter-spacing:0.08em;
+            color:#3A78B5;
+            text-transform:uppercase;
+            margin-bottom:0.5rem;
+        }
+
+        .page-title {
+            font-size:2.7rem;
+            font-weight:900;
+            color:#16324F;
+            line-height:1.1;
+            margin-bottom:0.8rem;
+        }
+
+        .page-subtitle {
+            font-size:1.18rem;
+            line-height:1.7;
+            color:#555;
+            max-width:820px;
+            margin-bottom:1.5rem;
+        }
+
+        .principle-box {
+            background:#FFFFFF;
+            border:1px solid #ECECEC;
+            border-radius:24px;
+            padding:30px;
+            margin-bottom:28px;
+            box-shadow:0 8px 24px rgba(0,0,0,0.06);
+        }
+
+        .principle-title {
+            font-size:1.55rem;
+            font-weight:850;
+            color:#16324F;
+            margin-bottom:0.5rem;
+        }
+
+        .principle-body {
+            font-size:1.05rem;
+            line-height:1.7;
+            color:#555;
+        }
+
+        .notice-item {
+            background:#FFFFFF;
+            border:1px solid #ECECEC;
+            border-radius:18px;
+            padding:18px 20px;
+            margin-bottom:12px;
+            box-shadow:0 4px 14px rgba(0,0,0,0.035);
+        }
+
+        .notice-item-title {
+            font-size:1.03rem;
+            font-weight:700;
+            color:#16324F;
+        }
+
+        .section-heading {
+            font-size:1.6rem;
+            font-weight:850;
+            color:#16324F;
+            margin-top:1.5rem;
+            margin-bottom:1rem;
+        }
+        </style>
+        """,
+        unsafe_allow_html=True,
+    )
+
+    if LANG == "en":
+        st.markdown('<div class="page-eyebrow">Observe before interpreting</div>', unsafe_allow_html=True)
+        st.markdown('<div class="page-title">Noticing Learners</div>', unsafe_allow_html=True)
+        st.markdown(
+            """
+            <div class="page-subtitle">
+                Use this page to notice possible learner needs without rushing to diagnosis,
+                judgement, or fixed conclusions.
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+    else:
+        st.markdown('<div class="page-eyebrow">判断する前に観察する</div>', unsafe_allow_html=True)
+        st.markdown('<div class="page-title">学習者に気づく</div>', unsafe_allow_html=True)
+        st.markdown(
+            """
+            <div class="page-subtitle">
+                このページでは、診断や決めつけを急がずに、
+                学習者のニーズの可能性に気づくための視点を確認します。
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
 
     try:
         autoplay_video("assets/notice_without_labeling.mp4")
     except Exception:
-        st.info(
-            "Video not found."
-            if LANG == "en"
-            else "動画が見つかりません。"
+        st.info("Video not found." if LANG == "en" else "動画が見つかりません。")
+
+    if LANG == "en":
+        st.markdown(
+            """
+            <div class="principle-box">
+                <div class="principle-title">👀 Notice First. Interpret Later.</div>
+                <div class="principle-body">
+                    A single classroom moment rarely tells the whole story.
+                    Look for patterns over time, changes across situations, and the conditions
+                    that make participation easier or harder.
+                </div>
+            </div>
+            """,
+            unsafe_allow_html=True,
         )
-    st.divider()
+    else:
+        st.markdown(
+            """
+            <div class="principle-box">
+                <div class="principle-title">👀 まず気づき、あとで考える</div>
+                <div class="principle-body">
+                    一度の様子だけで、すべてを判断することはできません。
+                    時間の中で見えるパターンや、状況による変化、
+                    参加しやすくなる条件に目を向けます。
+                </div>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
 
     level = st.selectbox(
         t["select_level"],
@@ -82,12 +181,25 @@ def render_noticing(
         format_func=lambda x: LEVEL_LABELS[LANG][x],
     )
 
-    st.markdown(f"## {t['what_teachers_notice']}")
+    st.markdown(
+        f'<div class="section-heading">{t["what_teachers_notice"]}</div>',
+        unsafe_allow_html=True,
+    )
 
     for item in NOTICING_EXAMPLES[level][LANG]:
-        st.markdown(f"- {item}")
+        st.markdown(
+            f"""
+            <div class="notice-item">
+                <div class="notice-item-title">• {item}</div>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
 
-    st.markdown(f"## {t['what_not_to_assume']}")
+    st.markdown(
+        f'<div class="section-heading">{t["what_not_to_assume"]}</div>',
+        unsafe_allow_html=True,
+    )
 
     if LANG == "en":
         phrase_block(
@@ -102,9 +214,7 @@ def render_noticing(
             "try",
         )
 
-        st.warning(
-            "What might this learner be experiencing that is not immediately visible?"
-        )
+        st.warning("What might this learner be experiencing that is not immediately visible?")
 
     else:
         phrase_block(
@@ -119,6 +229,4 @@ def render_noticing(
             "try",
         )
 
-        st.warning(
-            "この生徒には、すぐには見えないどのような経験があるかもしれませんか？"
-        )
+        st.warning("この生徒には、すぐには見えないどのような経験があるかもしれませんか？")
