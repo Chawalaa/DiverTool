@@ -146,35 +146,6 @@ def render_noticing(
     except Exception:
         st.info("Video not found." if LANG == "en" else "動画が見つかりません。")
 
-    if LANG == "en":
-        st.markdown(
-            """
-            <div class="principle-box">
-                <div class="principle-title">👀 Notice First. Interpret Later.</div>
-                <div class="principle-body">
-                    A single classroom moment rarely tells the whole story.
-                    Look for patterns over time, changes across situations, and the conditions
-                    that make participation easier or harder.
-                </div>
-            </div>
-            """,
-            unsafe_allow_html=True,
-        )
-    else:
-        st.markdown(
-            """
-            <div class="principle-box">
-                <div class="principle-title">👀 まず気づき、あとで考える</div>
-                <div class="principle-body">
-                    一度の様子だけで、すべてを判断することはできません。
-                    時間の中で見えるパターンや、状況による変化、
-                    参加しやすくなる条件に目を向けます。
-                </div>
-            </div>
-            """,
-            unsafe_allow_html=True,
-        )
-
     level = st.selectbox(
         t["select_level"],
         LEVELS,
