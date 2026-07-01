@@ -1,5 +1,5 @@
 import streamlit as st
-from datetime import datetime
+from urllib.parse import quote
 
 from app_pages.home import render_home
 from app_pages.noticing_learners import render_noticing
@@ -220,34 +220,6 @@ def apply_brand_styles():
             border-radius: 14px;
             padding: 1rem 1.2rem;
             margin: 0.75rem 0;
-        }}
-
-        div.stButton > button {{
-            width:100%;
-            min-height:48px;
-            border:none;
-            border-radius:16px;
-            background:#F5F7FB;
-            color:#16324F;
-            font-size:15px;
-            font-weight:650;
-            text-align:left;
-            padding-left:18px;
-            margin-bottom:8px;
-            transition:0.25s;
-            box-shadow:0 3px 10px rgba(0,0,0,.05);
-        }}
-
-        div.stButton > button:hover {{
-            background:#DCEEFF;
-            transform:translateY(-2px);
-            color:#16324F;
-        }}
-
-        div.stButton > button:focus {{
-            border:none;
-            outline:none;
-            color:#16324F;
         }}
         </style>
         """,
@@ -550,7 +522,7 @@ SCENARIO_KEYS = list(CONVERSATION_BUILDER.keys())
 
 
 # =====================================================
-# Sidebar Menu as Buttons
+# Sidebar Menu as Pastel Buttons
 # =====================================================
 st.sidebar.title(t["sidebar_title"])
 st.sidebar.caption(t["sidebar_caption"])
@@ -584,17 +556,60 @@ PAGE_LABELS = {
     "About the Research": t["about"],
 }
 
+MENU_COLORS = {
+    "Home": "#DCEEFF",
+    "Noticing Learners": "#FFF6CC",
+    "Conversation Support": "#DDF5E7",
+    "Conversation Builder": "#EEE6FF",
+    "Scripts by Situation": "#FFE4D6",
+    "Visual Metaphors": "#DFF7F4",
+    "Quick Classroom Tools": "#E7F5D9",
+    "Scenario Practice": "#FFEED6",
+    "Teacher Reflection": "#F3E8FF",
+    "Feedback": "#FFE4EF",
+    "About the Research": "#F1F1F1",
+}
+
 if st.session_state.page not in PAGE_OPTIONS:
     st.session_state.page = "Home"
 
+query_page = st.query_params.get("page")
+
+if query_page in PAGE_OPTIONS:
+    st.session_state.page = query_page
+
 for page_name in PAGE_OPTIONS:
-    if st.sidebar.button(
-        PAGE_LABELS[page_name],
-        key=f"menu_{page_name}",
-        use_container_width=True,
-    ):
-        st.session_state.page = page_name
-        st.rerun()
+    active = st.session_state.page == page_name
+    bg_color = MENU_COLORS[page_name]
+
+    border = "2px solid #3A78B5" if active else "1px solid rgba(0,0,0,0.06)"
+    shadow = (
+        "0 6px 16px rgba(58,120,181,0.22)"
+        if active
+        else "0 3px 10px rgba(0,0,0,0.05)"
+    )
+
+    st.sidebar.markdown(
+        f"""
+        <a href="?page={quote(page_name)}" target="_self" style="text-decoration:none;">
+            <div style="
+                background:{bg_color};
+                border:{border};
+                border-radius:16px;
+                padding:14px 16px;
+                margin-bottom:10px;
+                color:#16324F;
+                font-size:15px;
+                font-weight:700;
+                box-shadow:{shadow};
+                transition:0.2s;
+            ">
+                {PAGE_LABELS[page_name]}
+            </div>
+        </a>
+        """,
+        unsafe_allow_html=True,
+    )
 
 page = st.session_state.page
 
@@ -606,24 +621,10 @@ if page == "Home":
     render_home(t, LANG)
 
 elif page == "Noticing Learners":
-    render_noticing(
-        t,
-        LANG,
-        LEVELS,
-        LEVEL_LABELS,
-        NOTICING_EXAMPLES,
-        phrase_block,
-    )
+    render_noticing(t, LANG, LEVELS, LEVEL_LABELS, NOTICING_EXAMPLES, phrase_block)
 
 elif page == "Conversation Support":
-    render_conversation_support(
-        t,
-        LANG,
-        LEVELS,
-        LEVEL_LABELS,
-        CONVERSATION_BUILDER,
-        phrase_block,
-    )
+    render_conversation_support(t, LANG, LEVELS, LEVEL_LABELS, CONVERSATION_BUILDER, phrase_block)
 
 elif page == "Conversation Builder":
     render_conversation_builder(
