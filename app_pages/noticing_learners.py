@@ -67,28 +67,6 @@ def render_noticing(
             margin-bottom:1.5rem;
         }
 
-        .principle-box {
-            background:#FFFFFF;
-            border:1px solid #ECECEC;
-            border-radius:24px;
-            padding:30px;
-            margin-bottom:28px;
-            box-shadow:0 8px 24px rgba(0,0,0,0.06);
-        }
-
-        .principle-title {
-            font-size:1.55rem;
-            font-weight:850;
-            color:#16324F;
-            margin-bottom:0.5rem;
-        }
-
-        .principle-body {
-            font-size:1.05rem;
-            line-height:1.7;
-            color:#555;
-        }
-
         .notice-item {
             background:#FFFFFF;
             border:1px solid #ECECEC;
@@ -117,8 +95,14 @@ def render_noticing(
     )
 
     if LANG == "en":
-        st.markdown('<div class="page-eyebrow">Observe before interpreting</div>', unsafe_allow_html=True)
-        st.markdown('<div class="page-title">Noticing Learners</div>', unsafe_allow_html=True)
+        st.markdown(
+            '<div class="page-eyebrow">Observe before interpreting</div>',
+            unsafe_allow_html=True,
+        )
+        st.markdown(
+            '<div class="page-title">Noticing Learners</div>',
+            unsafe_allow_html=True,
+        )
         st.markdown(
             """
             <div class="page-subtitle">
@@ -129,8 +113,14 @@ def render_noticing(
             unsafe_allow_html=True,
         )
     else:
-        st.markdown('<div class="page-eyebrow">判断する前に観察する</div>', unsafe_allow_html=True)
-        st.markdown('<div class="page-title">学習者に気づく</div>', unsafe_allow_html=True)
+        st.markdown(
+            '<div class="page-eyebrow">判断する前に観察する</div>',
+            unsafe_allow_html=True,
+        )
+        st.markdown(
+            '<div class="page-title">学習者に気づく</div>',
+            unsafe_allow_html=True,
+        )
         st.markdown(
             """
             <div class="page-subtitle">
@@ -161,7 +151,7 @@ def render_noticing(
         st.markdown(
             f"""
             <div class="notice-item">
-                <div class="notice-item-title">• {item}</div>
+                <div class="notice-item-title">{item}</div>
             </div>
             """,
             unsafe_allow_html=True,
@@ -185,7 +175,9 @@ def render_noticing(
             "try",
         )
 
-        st.warning("What might this learner be experiencing that is not immediately visible?")
+        st.warning(
+            "What might this learner be experiencing that is not immediately visible?"
+        )
 
     else:
         phrase_block(
@@ -200,4 +192,6 @@ def render_noticing(
             "try",
         )
 
-        st.warning("この生徒には、すぐには見えないどのような経験があるかもしれませんか？")
+        st.warning(
+            "この生徒には、すぐには見えないどのような経験があるかもしれませんか？"
+        )
