@@ -1,13 +1,8 @@
 import streamlit as st
 import base64
-from textwrap import dedent
 
 
-# --------------------------------------------------
-# Hero Video
-# --------------------------------------------------
 def autoplay_video(video_path):
-
     with open(video_path, "rb") as video_file:
         video_bytes = video_file.read()
 
@@ -35,11 +30,7 @@ def autoplay_video(video_path):
     )
 
 
-# --------------------------------------------------
-# Hero Box
-# --------------------------------------------------
 def hero_box(title):
-
     st.markdown(
         f"""
         <div style="
@@ -63,53 +54,25 @@ def hero_box(title):
     )
 
 
-# --------------------------------------------------
-# Footer
-# --------------------------------------------------
 def render_footer():
+    st.divider()
 
-    st.markdown("---")
-
-    st.markdown(
-        dedent(
-            """
-<div style="
-text-align:center;
-padding:30px 10px;
-color:#6B6B6B;
-font-size:0.95rem;
-line-height:1.9;
-">
-
-<strong>DOTS Toolkit</strong><br>
-
-Designing Culturally Responsive Teacher–Student Communication
-for Inclusive Classrooms in Japan
-
-<br><br>
-
-Developed by <strong>Hope Chawala Banda</strong><br>
-
-Developed at the Keio University Graduate School of Media Design (KMD), PoliPro Laboratory
-
-<br><br>
-
-Master's Research Project • 2026
-
-<br><br>
-
-© 2026 Hope Chawala Banda. All Rights Reserved.
-
-</div>
-"""
-        ),
-        unsafe_allow_html=True,
+    st.markdown("### DOTS Toolkit")
+    st.caption(
+        "Designing Culturally Responsive Teacher–Student Communication "
+        "for Inclusive Classrooms in Japan"
     )
 
+    st.markdown("**Developed by Hope Chawala Banda**")
+    st.caption(
+        "Developed at the Keio University Graduate School of Media Design (KMD), "
+        "PoliPro Laboratory"
+    )
 
-# --------------------------------------------------
-# Page
-# --------------------------------------------------
+    st.caption("Master's Research Project • 2026")
+    st.caption("© 2026 Hope Chawala Banda. All Rights Reserved.")
+
+
 def render_about_the_research(t, LANG):
 
     st.title(t["about"])
@@ -124,7 +87,6 @@ def render_about_the_research(t, LANG):
     st.divider()
 
     if LANG == "en":
-
         st.markdown(
             """
 This toolkit was developed as part of a research project exploring culturally responsive communication between teachers and students in Japanese school contexts.
@@ -149,7 +111,6 @@ Rather than focusing on diagnosis, the research investigates how communication i
         )
 
     else:
-
         st.markdown(
             """
 このツールキットは、日本の学校における教師と生徒の文化的に配慮したコミュニケーションに関する研究プロジェクトの一環として開発されました。
