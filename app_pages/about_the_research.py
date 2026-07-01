@@ -1,8 +1,13 @@
 import streamlit as st
 import base64
+from textwrap import dedent
 
 
+# --------------------------------------------------
+# Hero Video
+# --------------------------------------------------
 def autoplay_video(video_path):
+
     with open(video_path, "rb") as video_file:
         video_bytes = video_file.read()
 
@@ -30,7 +35,11 @@ def autoplay_video(video_path):
     )
 
 
+# --------------------------------------------------
+# Hero Box
+# --------------------------------------------------
 def hero_box(title):
+
     st.markdown(
         f"""
         <div style="
@@ -54,39 +63,53 @@ def hero_box(title):
     )
 
 
+# --------------------------------------------------
+# Footer
+# --------------------------------------------------
 def render_footer():
+
     st.markdown("---")
 
     st.markdown(
-        """
-        <div style="
-            text-align:center;
-            padding:28px 10px;
-            color:#6B6B6B;
-            font-size:0.95rem;
-            line-height:1.8;
-        ">
+        dedent(
+            """
+<div style="
+text-align:center;
+padding:30px 10px;
+color:#6B6B6B;
+font-size:0.95rem;
+line-height:1.9;
+">
 
-            <strong>DOTS Toolkit</strong><br>
-            Designing Culturally Responsive Teacher–Student Communication
-            for Inclusive Classrooms in Japan
-            <br><br>
+<strong>DOTS Toolkit</strong><br>
 
-            Developed by <strong>Hope Chawala Banda</strong><br>
-            Developed at the Keio University Graduate School of Media Design (KMD), PoliPro Laboratory
-            <br><br>
+Designing Culturally Responsive Teacher–Student Communication
+for Inclusive Classrooms in Japan
 
-            Master's Research Project • 2026
-            <br><br>
+<br><br>
 
-            © 2026 Hope Chawala Banda. All Rights Reserved.
+Developed by <strong>Hope Chawala Banda</strong><br>
 
-        </div>
-        """,
+Developed at the Keio University Graduate School of Media Design (KMD), PoliPro Laboratory
+
+<br><br>
+
+Master's Research Project • 2026
+
+<br><br>
+
+© 2026 Hope Chawala Banda. All Rights Reserved.
+
+</div>
+"""
+        ),
         unsafe_allow_html=True,
     )
 
 
+# --------------------------------------------------
+# Page
+# --------------------------------------------------
 def render_about_the_research(t, LANG):
 
     st.title(t["about"])
@@ -104,12 +127,12 @@ def render_about_the_research(t, LANG):
 
         st.markdown(
             """
-This toolkit was designed as part of a research project on culturally responsive communication between teachers and students in Japanese school contexts.
+This toolkit was developed as part of a research project exploring culturally responsive communication between teachers and students in Japanese school contexts.
 
-The design draws upon findings from classroom observations, teacher interviews, educator surveys, interactive design activities, and expert feedback.
+The design is informed by classroom observations, teacher interviews, educator surveys, participatory design activities, and expert feedback.
 
-Rather than focusing on diagnosis, the research explores how communication itself can become a form of inclusive support by helping teachers notice learner needs and respond with dignity, empathy, and cultural sensitivity.
-            """
+Rather than focusing on diagnosis, the research investigates how communication itself can become a form of inclusive support—helping teachers notice learner needs and respond with dignity, empathy, and cultural sensitivity.
+"""
         )
 
         st.markdown("## Design Principles")
@@ -122,7 +145,7 @@ Rather than focusing on diagnosis, the research explores how communication itsel
 - Make hidden learning and communication needs easier to discuss.
 - Offer multiple pathways for classroom participation.
 - Use visual metaphors instead of medical or deficit-based imagery.
-            """
+"""
         )
 
     else:
@@ -131,10 +154,10 @@ Rather than focusing on diagnosis, the research explores how communication itsel
             """
 このツールキットは、日本の学校における教師と生徒の文化的に配慮したコミュニケーションに関する研究プロジェクトの一環として開発されました。
 
-設計には、教室観察、教師インタビュー、教育者アンケート、参加型デザイン活動、専門家からのフィードバックで得られた知見が反映されています。
+設計には、教室観察、教師インタビュー、教育者アンケート、参加型デザイン活動、専門家からのフィードバックによって得られた知見が反映されています。
 
 本研究は診断を目的とするものではなく、教師が学習者のニーズに気づき、尊厳・共感・文化的配慮を大切にした対話を実践できるよう支援することを目的としています。
-            """
+"""
         )
 
         st.markdown("## デザイン原則")
@@ -147,7 +170,7 @@ Rather than focusing on diagnosis, the research explores how communication itsel
 - 見えにくい学びやコミュニケーションの困難を話しやすくする。
 - 複数の参加方法を認める。
 - 医療的・欠陥ベースの表現ではなく視覚メタファーを用いる。
-            """
+"""
         )
 
     st.info(t["important_note"])
