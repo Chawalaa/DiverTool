@@ -10,23 +10,21 @@ def autoplay_video(video_path):
 
     st.markdown(
         f"""
-        <div style="width:100%;">
-            <video
-                autoplay
-                loop
-                muted
-                playsinline
-                style="
-                    width:100%;
-                    max-height:380px;
-                    object-fit:cover;
-                    border-radius:20px;
-                    box-shadow:0 6px 20px rgba(0,0,0,0.08);
-                    margin-bottom:20px;
-                ">
-                <source src="data:video/mp4;base64,{video_base64}" type="video/mp4">
-            </video>
-        </div>
+        <video
+            autoplay
+            loop
+            muted
+            playsinline
+            style="
+                width:100%;
+                max-height:360px;
+                object-fit:cover;
+                border-radius:24px;
+                box-shadow:0 8px 26px rgba(0,0,0,0.08);
+                margin-bottom:24px;
+            ">
+            <source src="data:video/mp4;base64,{video_base64}" type="video/mp4">
+        </video>
         """,
         unsafe_allow_html=True,
     )
@@ -34,64 +32,73 @@ def autoplay_video(video_path):
 
 def render_home(t, LANG):
 
-    st.title(t["app_title"])
-
-    try:
-        autoplay_video("assets/dots_intro.mp4")
-    except Exception:
-        st.info(
-            "Video not found."
-            if LANG == "en"
-            else "動画が見つかりません。"
-        )
-
     st.markdown(
         """
         <style>
-        .hero-box{
+        .home-eyebrow {
+            font-size:0.9rem;
+            font-weight:700;
+            letter-spacing:0.08em;
+            color:#3A78B5;
+            text-transform:uppercase;
+            margin-bottom:0.5rem;
+        }
+
+        .home-main-title {
+            font-size:3rem;
+            font-weight:900;
+            color:#16324F;
+            line-height:1.1;
+            margin-bottom:0.8rem;
+        }
+
+        .home-subtitle {
+            font-size:1.25rem;
+            line-height:1.7;
+            color:#555;
+            max-width:780px;
+            margin-bottom:1.5rem;
+        }
+
+        .hero-box {
             background:#FFFFFF;
             border:1px solid #ECECEC;
-            border-radius:22px;
-            padding:30px;
-            margin-top:10px;
-            margin-bottom:25px;
+            border-radius:24px;
+            padding:32px;
+            margin-top:8px;
+            margin-bottom:28px;
             box-shadow:0 8px 24px rgba(0,0,0,0.06);
         }
 
-        .hero-title{
-            font-size:1.7rem;
-            font-weight:800;
-            color:#16324F;
-            margin-bottom:12px;
-        }
-
-        .hero-body{
-            font-size:1.08rem;
-            line-height:1.8;
-            color:#555555;
-        }
-
-        .hero-highlight{
+        .hero-highlight {
             color:#3A78B5;
-            font-weight:700;
+            font-weight:800;
         }
 
-        .home-card-title{
-            font-size:1.35rem;
-            font-weight:800;
+        .journey-heading {
+            font-size:1.6rem;
+            font-weight:850;
             color:#16324F;
-            margin-top:0.8rem;
+            margin-top:1.5rem;
+            margin-bottom:1rem;
+        }
+
+        .home-card-title {
+            font-size:1.3rem;
+            font-weight:850;
+            color:#16324F;
+            margin-top:0.9rem;
             margin-bottom:0.35rem;
         }
 
-        .home-card-body{
+        .home-card-body {
             font-size:1rem;
             line-height:1.6;
-            color:#555555;
-            min-height:95px;
+            color:#555;
+            min-height:92px;
         }
 
-        div[data-testid="stImage"] img{
+        div[data-testid="stImage"] img {
             height:210px;
             object-fit:cover;
             border-radius:18px;
@@ -103,16 +110,43 @@ def render_home(t, LANG):
     )
 
     if LANG == "en":
+        st.markdown('<div class="home-eyebrow">Teacher–Student Communication</div>', unsafe_allow_html=True)
+        st.markdown('<div class="home-main-title">Welcome to DOTS</div>', unsafe_allow_html=True)
+        st.markdown(
+            """
+            <div class="home-subtitle">
+                A calm, practical toolkit for helping teachers notice learner needs,
+                communicate with care, and support participation without relying on diagnostic labels.
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+    else:
+        st.markdown('<div class="home-eyebrow">教師と生徒のコミュニケーション</div>', unsafe_allow_html=True)
+        st.markdown('<div class="home-main-title">DOTSへようこそ</div>', unsafe_allow_html=True)
+        st.markdown(
+            """
+            <div class="home-subtitle">
+                教師が学習者のニーズに気づき、思いやりをもって対話し、
+                診断ラベルに頼らず参加を支えるための実践的なツールキットです。
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+
+    try:
+        autoplay_video("assets/dots_intro.mp4")
+    except Exception:
+        st.info("Video not found." if LANG == "en" else "動画が見つかりません。")
+
+    if LANG == "en":
         st.markdown(
             """
             <div class="hero-box">
-                <div class="hero-title">Welcome to the DOTS Toolkit</div>
-                <div class="hero-body">
-                    DOTS is a communication toolkit designed to help teachers
-                    <span class="hero-highlight">notice learner needs</span>,
-                    <span class="hero-highlight">communicate with care</span>,
-                    and <span class="hero-highlight">support participation</span>
-                    without relying on diagnostic labels.
+                DOTS is designed around three simple actions:
+                <span class="hero-highlight">notice</span>,
+                <span class="hero-highlight">speak with care</span>, and
+                <span class="hero-highlight">support participation</span>.
             </div>
             """,
             unsafe_allow_html=True,
@@ -121,27 +155,22 @@ def render_home(t, LANG):
         st.markdown(
             """
             <div class="hero-box">
-                <div class="hero-title">DOTSツールキットへようこそ</div>
-                <div class="hero-body">
-                    DOTSは、教師が
-                    <span class="hero-highlight">学習者のニーズに気づき</span>、
-                    <span class="hero-highlight">思いやりをもって対話し</span>、
-                    <span class="hero-highlight">参加を支える</span>
-                    ためのコミュニケーションツールキットです。
-
-                    <br><br>
-
-                    日本の学校で行われた研究をもとに設計されており、
-                    教師と生徒の文化的に配慮した対話を支えるための
-                    実践的な言葉づかい、視覚メタファー、
-                    教室ツール、コミュニケーションガイドを提供します。
-                </div>
+                DOTSは、
+                <span class="hero-highlight">気づく</span>、
+                <span class="hero-highlight">配慮して話す</span>、
+                <span class="hero-highlight">参加を支える</span>
+                という三つの行動を中心に設計されています。
             </div>
             """,
             unsafe_allow_html=True,
         )
 
-    st.divider()
+    st.markdown(
+        '<div class="journey-heading">Start with one step</div>'
+        if LANG == "en"
+        else '<div class="journey-heading">最初の一歩を選ぶ</div>',
+        unsafe_allow_html=True,
+    )
 
     HOME_CARDS = [
         {
@@ -172,11 +201,7 @@ def render_home(t, LANG):
                 try:
                     st.image(item["image"], use_container_width=True)
                 except Exception:
-                    st.info(
-                        "Image not found."
-                        if LANG == "en"
-                        else "画像が見つかりません。"
-                    )
+                    st.info("Image not found." if LANG == "en" else "画像が見つかりません。")
 
                 st.markdown(
                     f"""
@@ -187,7 +212,7 @@ def render_home(t, LANG):
                 )
 
                 if st.button(
-                    "Explore" if LANG == "en" else "見る",
+                    "Start here" if LANG == "en" else "ここから始める",
                     key=item["page"],
                     use_container_width=True,
                 ):
@@ -196,14 +221,8 @@ def render_home(t, LANG):
 
     st.divider()
 
-    st.success(
-        "Designed for teacher–student communication."
-        if LANG == "en"
-        else "教師と生徒のコミュニケーションのために設計されています。"
-    )
-
     st.caption(
-        "DOTS Toolkit © 2026"
+        "DOTS Toolkit © 2026 · Designed for teacher–student communication"
         if LANG == "en"
-        else "DOTSツールキット © 2026"
+        else "DOTSツールキット © 2026 · 教師と生徒のコミュニケーションのために設計"
     )
