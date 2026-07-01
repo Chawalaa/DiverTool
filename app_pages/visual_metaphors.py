@@ -60,15 +60,6 @@ def render_visual_metaphors(t, LANG):
             margin-bottom:1.5rem;
         }
 
-        .metaphor-card {
-            background:#FFFFFF;
-            border:1px solid #ECECEC;
-            border-radius:24px;
-            padding:18px;
-            box-shadow:0 8px 24px rgba(0,0,0,0.05);
-            min-height:520px;
-        }
-
         .metaphor-title {
             font-size:1.45rem;
             font-weight:850;
@@ -109,8 +100,14 @@ def render_visual_metaphors(t, LANG):
     )
 
     if LANG == "en":
-        st.markdown('<div class="page-eyebrow">Visual language for inclusion</div>', unsafe_allow_html=True)
-        st.markdown('<div class="page-title">Visual Metaphors</div>', unsafe_allow_html=True)
+        st.markdown(
+            '<div class="page-eyebrow">Visual language for inclusion</div>',
+            unsafe_allow_html=True,
+        )
+        st.markdown(
+            '<div class="page-title">Visual Metaphors</div>',
+            unsafe_allow_html=True,
+        )
         st.markdown(
             """
             <div class="page-subtitle">
@@ -121,8 +118,14 @@ def render_visual_metaphors(t, LANG):
             unsafe_allow_html=True,
         )
     else:
-        st.markdown('<div class="page-eyebrow">インクルージョンのための視覚言語</div>', unsafe_allow_html=True)
-        st.markdown('<div class="page-title">視覚メタファー</div>', unsafe_allow_html=True)
+        st.markdown(
+            '<div class="page-eyebrow">インクルージョンのための視覚言語</div>',
+            unsafe_allow_html=True,
+        )
+        st.markdown(
+            '<div class="page-title">視覚メタファー</div>',
+            unsafe_allow_html=True,
+        )
         st.markdown(
             """
             <div class="page-subtitle">
@@ -177,40 +180,38 @@ def render_visual_metaphors(t, LANG):
 
     for col, item in zip(cols, METAPHORS):
         with col:
-            st.markdown('<div class="metaphor-card">', unsafe_allow_html=True)
+            with st.container(border=True):
 
-            title = item["title_ja"] if LANG == "ja" else item["title_en"]
-            body = item["body_ja"] if LANG == "ja" else item["body_en"]
-            tag = item["tag_ja"] if LANG == "ja" else item["tag_en"]
-            example = item["example_ja"] if LANG == "ja" else item["example_en"]
+                title = item["title_ja"] if LANG == "ja" else item["title_en"]
+                body = item["body_ja"] if LANG == "ja" else item["body_en"]
+                tag = item["tag_ja"] if LANG == "ja" else item["tag_en"]
+                example = item["example_ja"] if LANG == "ja" else item["example_en"]
 
-            try:
-                st.image(item["image"], use_container_width=True)
-            except Exception:
-                st.info(
-                    "Image not found. Please upload it to the assets folder."
-                    if LANG == "en"
-                    else "画像が見つかりません。assets フォルダにアップロードしてください。"
+                try:
+                    st.image(item["image"], use_container_width=True)
+                except Exception:
+                    st.info(
+                        "Image not found. Please upload it to the assets folder."
+                        if LANG == "en"
+                        else "画像が見つかりません。assets フォルダにアップロードしてください。"
+                    )
+
+                st.markdown(
+                    f"""
+                    <div class="metaphor-title">{title}</div>
+                    <div class="metaphor-body">{body}</div>
+                    <span class="metaphor-tag">{tag}</span>
+                    """,
+                    unsafe_allow_html=True,
                 )
 
-            st.markdown(
-                f"""
-                <div class="metaphor-title">{title}</div>
-                <div class="metaphor-body">{body}</div>
-                <span class="metaphor-tag">{tag}</span>
-                """,
-                unsafe_allow_html=True,
-            )
-
-            with st.expander("View example" if LANG == "en" else "詳しく見る"):
-                st.write(example)
-                st.write(
-                    "Use this metaphor to talk about difference gently, without ranking students or using diagnostic language."
-                    if LANG == "en"
-                    else "生徒を比較したり、診断的な言葉を使ったりせずに、違いについてやわらかく話すときに使います。"
-                )
-
-            st.markdown("</div>", unsafe_allow_html=True)
+                with st.expander("View example" if LANG == "en" else "詳しく見る"):
+                    st.write(example)
+                    st.write(
+                        "Use this metaphor to talk about difference gently, without ranking students or using diagnostic language."
+                        if LANG == "en"
+                        else "生徒を比較したり、診断的な言葉を使ったりせずに、違いについてやわらかく話すときに使います。"
+                    )
 
     st.divider()
 
