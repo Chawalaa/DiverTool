@@ -1,5 +1,6 @@
 import streamlit as st
 from datetime import datetime
+
 from app_pages.home import render_home
 from app_pages.noticing_learners import render_noticing
 from app_pages.conversation_support import render_conversation_support
@@ -11,14 +12,11 @@ from app_pages.scenario_practice import render_scenario_practice
 from app_pages.teacher_reflection import render_teacher_reflection
 from app_pages.feedback import render_feedback
 from app_pages.about_the_research import render_about_the_research
-# =====================================================
-# Culturally Responsive Teacher Communication Toolkit
-# Teacher–Student Communication Focus
-# =====================================================
 
-# -----------------------------
+
+# =====================================================
 # Page Config
-# -----------------------------
+# =====================================================
 st.set_page_config(
     page_title="DOTS Toolkit",
     page_icon="assets/dots_logo.png",
@@ -26,13 +24,14 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
-# -----------------------------
+
+# =====================================================
 # Language Toggle
-# -----------------------------
+# =====================================================
 st.sidebar.markdown("### Language / 言語")
 
 language = st.sidebar.selectbox(
-   "Language / 言語",
+    "Language / 言語",
     ["English", "日本語"],
     index=0,
     key="language_toggle",
@@ -41,11 +40,14 @@ language = st.sidebar.selectbox(
 LANG = "ja" if language == "日本語" else "en"
 st.sidebar.markdown("---")
 
+
 if "page" not in st.session_state:
     st.session_state.page = "Home"
-# -----------------------------
+
+
+# =====================================================
 # Text Dictionary
-# -----------------------------
+# =====================================================
 TEXT = {
     "en": {
         "sidebar_title": "DOTS Toolkit",
@@ -108,8 +110,6 @@ TEXT = {
         "feedback": "フィードバック",
         "about": "研究について",
         "app_title": "文化的に配慮した教師コミュニケーション・ツールキット",
-        "home_subtitle": "見えにくい学びやコミュニケーションの困難を抱える可能性のある学習者との教師・生徒間の対話を支えるために",
-        "home_intro": "このツールキットは、教師が生徒と慎重で、尊重のある、低いプレッシャーの対話を準備するためのものです。直接的なラベルづけが不安、偏見、誤解につながりやすい学校現場を想定しています。",
         "notice_title": "ラベルづけせずに気づく",
         "notice_body": "診断を急がず、学びやコミュニケーション上のニーズの可能性に気づく。",
         "speak_title": "配慮して話す",
@@ -141,9 +141,10 @@ TEXT = {
 
 t = TEXT[LANG]
 
-# -----------------------------
+
+# =====================================================
 # Design System
-# -----------------------------
+# =====================================================
 PALETTE = {
     "soft_blue": "#DCEEFF",
     "mint": "#DDF5E7",
@@ -220,6 +221,34 @@ def apply_brand_styles():
             padding: 1rem 1.2rem;
             margin: 0.75rem 0;
         }}
+
+        div.stButton > button {{
+            width:100%;
+            min-height:48px;
+            border:none;
+            border-radius:16px;
+            background:#F5F7FB;
+            color:#16324F;
+            font-size:15px;
+            font-weight:650;
+            text-align:left;
+            padding-left:18px;
+            margin-bottom:8px;
+            transition:0.25s;
+            box-shadow:0 3px 10px rgba(0,0,0,.05);
+        }}
+
+        div.stButton > button:hover {{
+            background:#DCEEFF;
+            transform:translateY(-2px);
+            color:#16324F;
+        }}
+
+        div.stButton > button:focus {{
+            border:none;
+            outline:none;
+            color:#16324F;
+        }}
         </style>
         """,
         unsafe_allow_html=True,
@@ -258,9 +287,10 @@ def phrase_block(label, text, block_type="phrase"):
 
 apply_brand_styles()
 
-# -----------------------------
+
+# =====================================================
 # Core Data
-# -----------------------------
+# =====================================================
 LEVELS = ["General", "Elementary School", "Junior High School", "High School"]
 
 LEVEL_LABELS = {
@@ -277,6 +307,7 @@ LEVEL_LABELS = {
         "High School": "高校",
     },
 }
+
 
 NOTICING_EXAMPLES = {
     "General": {
@@ -336,6 +367,7 @@ NOTICING_EXAMPLES = {
         ],
     },
 }
+
 
 CONVERSATION_BUILDER = {
     "Student is silent during group work": {
@@ -516,11 +548,13 @@ CONVERSATION_BUILDER = {
 
 SCENARIO_KEYS = list(CONVERSATION_BUILDER.keys())
 
-# -----------------------------
-# Sidebar
-# -----------------------------
+
+# =====================================================
+# Sidebar Menu as Buttons
+# =====================================================
 st.sidebar.title(t["sidebar_title"])
 st.sidebar.caption(t["sidebar_caption"])
+st.sidebar.markdown("---")
 
 PAGE_OPTIONS = [
     "Home",
@@ -553,72 +587,44 @@ PAGE_LABELS = {
 if st.session_state.page not in PAGE_OPTIONS:
     st.session_state.page = "Home"
 
-page = st.sidebar.radio(
-    t["menu"],
-    PAGE_OPTIONS,
-    index=PAGE_OPTIONS.index(st.session_state.page),
-    format_func=lambda x: PAGE_LABELS[x],
-)
+for page_name in PAGE_OPTIONS:
+    if st.sidebar.button(
+        PAGE_LABELS[page_name],
+        key=f"menu_{page_name}",
+        use_container_width=True,
+    ):
+        st.session_state.page = page_name
+        st.rerun()
 
-st.session_state.page = page
+page = st.session_state.page
 
+
+# =====================================================
+# Page Routing
+# =====================================================
 if page == "Home":
     render_home(t, LANG)
 
 elif page == "Noticing Learners":
-    render_noticing(t, LANG, LEVELS, LEVEL_LABELS, NOTICING_EXAMPLES, phrase_block)
+    render_noticing(
+        t,
+        LANG,
+        LEVELS,
+        LEVEL_LABELS,
+        NOTICING_EXAMPLES,
+        phrase_block,
+    )
 
 elif page == "Conversation Support":
-    render_conversation_support(t, LANG, LEVELS, LEVEL_LABELS, CONVERSATION_BUILDER, phrase_block)
-
-elif page == "Conversation Builder":
-    render_conversation_builder(t, LANG, LEVELS, LEVEL_LABELS, CONVERSATION_BUILDER, SCENARIO_KEYS, card, phrase_block)
-
-elif page == "Scripts by Situation":
-    render_scripts(t, LANG, LEVELS, LEVEL_LABELS, CONVERSATION_BUILDER, SCENARIO_KEYS, phrase_block)
-
-elif page == "Visual Metaphors":
-    render_visual_metaphors(t, LANG)
-
-elif page == "Quick Classroom Tools":
-    render_quick_tools(t, LANG)
-
-elif page == "Scenario Practice":
-    render_scenario_practice(t, LANG, LEVELS, LEVEL_LABELS, CONVERSATION_BUILDER, SCENARIO_KEYS, phrase_block)
-
-elif page == "Teacher Reflection":
-    render_teacher_reflection(t, LANG)
-
-elif page == "Feedback":
-    render_feedback(t, LANG)
-
-elif page == "About the Research":
-    render_about_the_research(t, LANG)
-elif page == "Scenario Practice":
-    render_scenario_practice(
+    render_conversation_support(
         t,
         LANG,
         LEVELS,
         LEVEL_LABELS,
         CONVERSATION_BUILDER,
-        SCENARIO_KEYS,
         phrase_block,
     )
-elif page == "Teacher Reflection":
-    render_teacher_reflection(t, LANG)
-    
-elif page == "Visual Metaphors":
-    render_visual_metaphors(t, LANG)
-elif page == "Scripts by Situation":
-    render_scripts(
-        t,
-        LANG,
-        LEVELS,
-        LEVEL_LABELS,
-        CONVERSATION_BUILDER,
-        SCENARIO_KEYS,
-        phrase_block,
-    )
+
 elif page == "Conversation Builder":
     render_conversation_builder(
         t,
@@ -630,21 +636,40 @@ elif page == "Conversation Builder":
         card,
         phrase_block,
     )
-elif page == "Conversation Support":
-    render_conversation_support(
+
+elif page == "Scripts by Situation":
+    render_scripts(
         t,
         LANG,
         LEVELS,
         LEVEL_LABELS,
         CONVERSATION_BUILDER,
+        SCENARIO_KEYS,
         phrase_block,
     )
-elif page == "Noticing Learners":
-    render_noticing(
+
+elif page == "Visual Metaphors":
+    render_visual_metaphors(t, LANG)
+
+elif page == "Quick Classroom Tools":
+    render_quick_tools(t, LANG)
+
+elif page == "Scenario Practice":
+    render_scenario_practice(
         t,
         LANG,
         LEVELS,
         LEVEL_LABELS,
-        NOTICING_EXAMPLES,
+        CONVERSATION_BUILDER,
+        SCENARIO_KEYS,
         phrase_block,
     )
+
+elif page == "Teacher Reflection":
+    render_teacher_reflection(t, LANG)
+
+elif page == "Feedback":
+    render_feedback(t, LANG)
+
+elif page == "About the Research":
+    render_about_the_research(t, LANG)
