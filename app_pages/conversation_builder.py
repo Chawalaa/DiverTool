@@ -231,18 +231,3 @@ def render_conversation_builder(
     phrase_block(t["follow_up_question"], response["follow_up"][LANG], "phrase")
 
     st.warning(t["before_speak_prompt"])
-
-    with st.expander("Copy-ready note" if LANG == "en" else "コピー用メモ"):
-        st.code(
-            f"""{t['situation']}: {response['label'][LANG]}
-
-{t['school_level']}: {LEVEL_LABELS[LANG][level]}
-
-{t['try_saying']}: {response['try'][level][LANG]}
-
-{t['softer_version']}: {response['soft'][level][LANG]}
-
-{t['follow_up_question']}: {response['follow_up'][LANG]}
-""",
-            language="text",
-        )
