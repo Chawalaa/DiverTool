@@ -79,11 +79,6 @@ def render_about_the_research(t, LANG):
 
     autoplay_video("assets/about_the_research.mp4")
 
-    if LANG == "en":
-        hero_box("🔬 Research That Informs Practice.")
-    else:
-        hero_box("🔬 実践につながる研究")
-
     st.divider()
 
     if LANG == "en":
