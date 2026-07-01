@@ -1,5 +1,6 @@
 import streamlit as st
 import base64
+import random
 
 
 def autoplay_video(video_path):
@@ -77,29 +78,6 @@ def render_scenario_practice(
             box-shadow:0 8px 24px rgba(0,0,0,0.05);
         }
 
-        .step-label {
-            font-size:0.85rem;
-            font-weight:800;
-            color:#3A78B5;
-            letter-spacing:0.08em;
-            text-transform:uppercase;
-            margin-bottom:0.4rem;
-        }
-
-        .step-title {
-            font-size:1.45rem;
-            font-weight:850;
-            color:#16324F;
-            margin-bottom:0.6rem;
-        }
-
-        .step-body {
-            font-size:1.02rem;
-            line-height:1.65;
-            color:#555;
-            margin-bottom:1rem;
-        }
-
         .section-heading {
             font-size:1.55rem;
             font-weight:850;
@@ -112,14 +90,17 @@ def render_scenario_practice(
         unsafe_allow_html=True,
     )
 
+    if "random_scenario" not in st.session_state:
+        st.session_state.random_scenario = SCENARIO_KEYS[0]
+
     if LANG == "en":
         st.markdown('<div class="page-eyebrow">Practice before the conversation</div>', unsafe_allow_html=True)
         st.markdown('<div class="page-title">Scenario Practice</div>', unsafe_allow_html=True)
         st.markdown(
             """
             <div class="page-subtitle">
-                Rehearse supportive language before entering a sensitive classroom conversation.
-                Choose a school level and situation, then compare what to avoid with what to try.
+                Rehearse teacher–student conversations before sensitive classroom moments.
+                Choose a situation, compare language options, and prepare your own response.
             </div>
             """,
             unsafe_allow_html=True,
@@ -130,8 +111,8 @@ def render_scenario_practice(
         st.markdown(
             """
             <div class="page-subtitle">
-                繊細な教室での対話の前に、支援的な声かけを練習します。
-                学校段階と状況を選び、避けたい言い方と試したい言い方を確認します。
+                繊細な教室での対話の前に、教師から生徒への声かけを練習します。
+                状況を選び、言葉を比較し、自分の声かけを準備します。
             </div>
             """,
             unsafe_allow_html=True,
@@ -140,25 +121,9 @@ def render_scenario_practice(
     autoplay_video("assets/scenario_practice.mp4")
 
     st.markdown(
-        """
-        <div class="practice-card">
-            <div class="step-label">Step 1</div>
-            <div class="step-title">Choose a practice situation</div>
-            <div class="step-body">
-                Start with a classroom moment you want to rehearse. The tool will suggest a careful response.
-            </div>
-        </div>
-        """
+        '<div class="section-heading">Step 1 · Choose a scenario</div>'
         if LANG == "en"
-        else """
-        <div class="practice-card">
-            <div class="step-label">Step 1</div>
-            <div class="step-title">練習する場面を選ぶ</div>
-            <div class="step-body">
-                練習したい教室での場面を選びます。ツールが配慮ある声かけを提案します。
-            </div>
-        </div>
-        """,
+        else '<div class="section-heading">Step 1 · シナリオを選ぶ</div>',
         unsafe_allow_html=True,
     )
 
@@ -175,20 +140,127 @@ def render_scenario_practice(
         scenario_key = st.selectbox(
             t["situation"],
             SCENARIO_KEYS,
+            index=SCENARIO_KEYS.index(st.session_state.random_scenario),
             format_func=lambda x: CONVERSATION_BUILDER[x]["label"][LANG],
         )
 
     item = CONVERSATION_BUILDER[scenario_key]
 
     st.markdown(
-        '<div class="section-heading">Step 2 · Compare the language</div>'
+        '<div class="section-heading">Step 2 · Practice the response</div>'
         if LANG == "en"
-        else '<div class="section-heading">Step 2 · 言葉を比べる</div>',
+        else '<div class="section-heading">Step 2 · 声かけを練習する</div>',
         unsafe_allow_html=True,
     )
 
-    phrase_block(t["avoid_saying"], item["avoid"][LANG], "avoid")
-    phrase_block(t["try_saying"], item["try"][level][LANG], "try")
-    phrase_block(t["follow_up_question"], item["follow_up"][LANG], "phrase")
+    b1, b2, b3 = st.columns(3)
 
-    st.warning(t["before_speak_prompt"])
+    with b1:
+        show_response = st.button(
+            "Show safer response" if LANG == "en" else "安全な声かけを見る",
+            use_container_width=True,
+        )
+
+    with b2:
+        show_softer = st.button(
+            "Make it softer" if LANG == "en" else "もっとやわらかくする",
+            use_container_width=True,
+        )
+
+    with b3:
+        show_why = st.button(
+            "Why this works" if LANG == "en" else "なぜ有効かを見る",
+            use_container_width=True,
+        )
+
+    if show_response:
+        phrase_block(t["avoid_saying"], item["avoid"][LANG], "avoid")
+        phrase_block(t["try_saying"], item["try"][level][LANG], "try")
+        phrase_block(t["follow_up_question"], item["follow_up"][LANG], "phrase")
+
+    if show_softer:
+        phrase_block(t["softer_version"], item["soft"][level][LANG], "phrase")
+
+    if show_why:
+        st.info(
+            "This response works because it lowers pressure, avoids blame, protects the learner’s dignity, and offers another way to participate."
+            if LANG == "en"
+            else "この声かけは、プレッシャーを下げ、責める表現を避け、生徒の尊厳を守り、別の参加方法を示すため有効です。"
+        )
+
+    st.markdown(
+        '<div class="section-heading">Step 3 · Continue the conversation</div>'
+        if LANG == "en"
+        else '<div class="section-heading">Step 3 · 対話を続ける</div>',
+        unsafe_allow_html=True,
+    )
+
+    c1, c2, c3 = st.columns(3)
+
+    with c1:
+        if st.button(
+            "Student may respond…" if LANG == "en" else "生徒の反応例",
+            use_container_width=True,
+        ):
+            st.write(
+                "- Silence\n- Short answer\n- Nervous laughter\n- Looking away\n- Quiet agreement"
+                if LANG == "en"
+                else "- 沈黙\n- 短い返事\n- 不安そうな笑い\n- 目をそらす\n- 小さくうなずく"
+            )
+
+    with c2:
+        if st.button(
+            "Teacher follow-up" if LANG == "en" else "教師の次の声かけ",
+            use_container_width=True,
+        ):
+            phrase_block(t["follow_up_question"], item["follow_up"][LANG], "phrase")
+
+    with c3:
+        if st.button(
+            "Reflection question" if LANG == "en" else "振り返りの問い",
+            use_container_width=True,
+        ):
+            st.warning(t["before_speak_prompt"])
+
+    st.markdown(
+        '<div class="section-heading">Step 4 · My practice note</div>'
+        if LANG == "en"
+        else '<div class="section-heading">Step 4 · 自分の練習メモ</div>',
+        unsafe_allow_html=True,
+    )
+
+    teacher_note = st.text_area(
+        "Write what you would say in your own words."
+        if LANG == "en"
+        else "自分ならどのように声をかけるか書いてみましょう。",
+        height=140,
+    )
+
+    col_a, col_b = st.columns(2)
+
+    with col_a:
+        with st.expander("Copy-ready script" if LANG == "en" else "コピー用スクリプト"):
+            st.code(
+                f"""{t['situation']}: {item['label'][LANG]}
+
+{t['school_level']}: {LEVEL_LABELS[LANG][level]}
+
+{t['try_saying']}: {item['try'][level][LANG]}
+
+{t['softer_version']}: {item['soft'][level][LANG]}
+
+{t['follow_up_question']}: {item['follow_up'][LANG]}
+
+My note:
+{teacher_note}
+""",
+                language="text",
+            )
+
+    with col_b:
+        if st.button(
+            "Try another scenario" if LANG == "en" else "別のシナリオを試す",
+            use_container_width=True,
+        ):
+            st.session_state.random_scenario = random.choice(SCENARIO_KEYS)
+            st.rerun()
