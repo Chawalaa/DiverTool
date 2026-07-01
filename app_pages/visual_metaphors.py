@@ -17,11 +17,11 @@ def autoplay_video(video_path):
             playsinline
             style="
                 width:100%;
-                max-height:380px;
+                max-height:360px;
                 object-fit:cover;
-                border-radius:20px;
-                box-shadow:0 6px 20px rgba(0,0,0,.08);
-                margin-bottom:20px;
+                border-radius:24px;
+                box-shadow:0 8px 26px rgba(0,0,0,0.08);
+                margin-bottom:24px;
             ">
             <source src="data:video/mp4;base64,{video_base64}" type="video/mp4">
         </video>
@@ -30,84 +30,110 @@ def autoplay_video(video_path):
     )
 
 
-def hero_box(title):
-    st.markdown(
-        f"""
-        <div style="
-            background:white;
-            border:1px solid #ECECEC;
-            border-radius:22px;
-            padding:30px;
-            margin-bottom:25px;
-            box-shadow:0 8px 24px rgba(0,0,0,.06);
-        ">
-            <h2 style="
-                margin:0;
-                color:#16324F;
-                font-size:1.7rem;
-            ">
-                {title}
-            </h2>
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
-
-
 def render_visual_metaphors(t, LANG):
-
-    st.title(t["visual_metaphors"])
-
-    # No try/except for now, so Streamlit shows the real error if the video fails.
-    autoplay_video("assets/visual_metaphors.mp4")
-
-    st.write(
-        "These metaphors help explain difference without using diagnostic or medical language."
-        if LANG == "en"
-        else "これらのメタファーは、診断的・医療的な言葉を使わずに違いを説明するためのものです。"
-    )
 
     st.markdown(
         """
         <style>
+        .page-eyebrow {
+            font-size:0.9rem;
+            font-weight:700;
+            letter-spacing:0.08em;
+            color:#3A78B5;
+            text-transform:uppercase;
+            margin-bottom:0.5rem;
+        }
+
+        .page-title {
+            font-size:2.7rem;
+            font-weight:900;
+            color:#16324F;
+            line-height:1.1;
+            margin-bottom:0.8rem;
+        }
+
+        .page-subtitle {
+            font-size:1.18rem;
+            line-height:1.7;
+            color:#555;
+            max-width:820px;
+            margin-bottom:1.5rem;
+        }
+
+        .metaphor-card {
+            background:#FFFFFF;
+            border:1px solid #ECECEC;
+            border-radius:24px;
+            padding:18px;
+            box-shadow:0 8px 24px rgba(0,0,0,0.05);
+            min-height:520px;
+        }
+
         .metaphor-title {
-            font-size: 1.45rem;
-            font-weight: 800;
-            color: #162B4D;
-            margin-top: 0.8rem;
-            margin-bottom: 0.4rem;
+            font-size:1.45rem;
+            font-weight:850;
+            color:#16324F;
+            margin-top:0.9rem;
+            margin-bottom:0.4rem;
         }
 
         .metaphor-body {
-            font-size: 0.98rem;
-            line-height: 1.55;
-            color: #3F3F3F;
-            min-height: 95px;
+            font-size:1rem;
+            line-height:1.6;
+            color:#555;
+            min-height:105px;
         }
 
         .metaphor-tag {
-            display: inline-block;
-            margin-top: 0.5rem;
-            margin-bottom: 0.7rem;
-            padding: 0.35rem 0.7rem;
-            border-radius: 999px;
-            font-size: 0.82rem;
-            font-weight: 600;
-            background: #DCEEFF;
-            color: #162B4D;
+            display:inline-block;
+            margin-top:0.7rem;
+            margin-bottom:0.8rem;
+            padding:0.35rem 0.75rem;
+            border-radius:999px;
+            font-size:0.82rem;
+            font-weight:700;
+            background:#DCEEFF;
+            color:#16324F;
         }
 
         div[data-testid="stImage"] img {
-            height: 180px;
-            object-fit: cover;
-            border-radius: 16px;
-            border: 1px solid #EEE8DF;
-            background: #FFFFFF;
+            height:200px;
+            object-fit:cover;
+            border-radius:18px;
+            border:1px solid #EEE8DF;
+            background:#FFFFFF;
         }
         </style>
         """,
         unsafe_allow_html=True,
     )
+
+    if LANG == "en":
+        st.markdown('<div class="page-eyebrow">Visual language for inclusion</div>', unsafe_allow_html=True)
+        st.markdown('<div class="page-title">Visual Metaphors</div>', unsafe_allow_html=True)
+        st.markdown(
+            """
+            <div class="page-subtitle">
+                Explain learner differences gently through dots, waves, and pathways —
+                without medical icons, warning colors, or diagnostic labels.
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+    else:
+        st.markdown('<div class="page-eyebrow">インクルージョンのための視覚言語</div>', unsafe_allow_html=True)
+        st.markdown('<div class="page-title">視覚メタファー</div>', unsafe_allow_html=True)
+        st.markdown(
+            """
+            <div class="page-subtitle">
+                Dots、Waves、Pathwaysを使って、診断的な言葉や医療的なイメージに頼らず、
+                学習者の違いをやわらかく説明します。
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+
+    autoplay_video("assets/visual_metaphors.mp4")
 
     METAPHORS = [
         {
@@ -145,45 +171,48 @@ def render_visual_metaphors(t, LANG):
         },
     ]
 
+    st.markdown("<br>", unsafe_allow_html=True)
+
     cols = st.columns(3)
 
     for col, item in zip(cols, METAPHORS):
         with col:
-            with st.container(border=True):
+            st.markdown('<div class="metaphor-card">', unsafe_allow_html=True)
 
-                title = item["title_ja"] if LANG == "ja" else item["title_en"]
-                body = item["body_ja"] if LANG == "ja" else item["body_en"]
-                tag = item["tag_ja"] if LANG == "ja" else item["tag_en"]
-                example = item["example_ja"] if LANG == "ja" else item["example_en"]
+            title = item["title_ja"] if LANG == "ja" else item["title_en"]
+            body = item["body_ja"] if LANG == "ja" else item["body_en"]
+            tag = item["tag_ja"] if LANG == "ja" else item["tag_en"]
+            example = item["example_ja"] if LANG == "ja" else item["example_en"]
 
-                try:
-                    st.image(
-                        item["image"],
-                        use_container_width=True,
-                    )
-                except Exception:
-                    st.info(
-                        "Image not found. Please upload it to the assets folder."
-                        if LANG == "en"
-                        else "画像が見つかりません。assets フォルダにアップロードしてください。"
-                    )
-
-                st.markdown(
-                    f"""
-                    <div class="metaphor-title">{title}</div>
-                    <div class="metaphor-body">{body}</div>
-                    <span class="metaphor-tag">{tag}</span>
-                    """,
-                    unsafe_allow_html=True,
+            try:
+                st.image(item["image"], use_container_width=True)
+            except Exception:
+                st.info(
+                    "Image not found. Please upload it to the assets folder."
+                    if LANG == "en"
+                    else "画像が見つかりません。assets フォルダにアップロードしてください。"
                 )
 
-                with st.expander("詳しく見る" if LANG == "ja" else "View"):
-                    st.write(example)
-                    st.write(
-                        "Use this metaphor to talk about difference gently, without ranking students or using diagnostic language."
-                        if LANG == "en"
-                        else "生徒を比較したり、診断的な言葉を使ったりせずに、違いについてやわらかく話すときに使います。"
-                    )
+            st.markdown(
+                f"""
+                <div class="metaphor-title">{title}</div>
+                <div class="metaphor-body">{body}</div>
+                <span class="metaphor-tag">{tag}</span>
+                """,
+                unsafe_allow_html=True,
+            )
+
+            with st.expander("View example" if LANG == "en" else "詳しく見る"):
+                st.write(example)
+                st.write(
+                    "Use this metaphor to talk about difference gently, without ranking students or using diagnostic language."
+                    if LANG == "en"
+                    else "生徒を比較したり、診断的な言葉を使ったりせずに、違いについてやわらかく話すときに使います。"
+                )
+
+            st.markdown("</div>", unsafe_allow_html=True)
+
+    st.divider()
 
     st.info(
         "Avoid brain images, diagnostic icons, warning colors, and visuals that suggest normal versus abnormal learners."
