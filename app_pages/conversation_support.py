@@ -131,33 +131,6 @@ def render_conversation_support(
     except Exception:
         st.info("Video not found." if LANG == "en" else "動画が見つかりません。")
 
-    if LANG == "en":
-        st.markdown(
-            """
-            <div class="principle-box">
-                <div class="principle-title">💬 Connection Before Correction.</div>
-                <div class="principle-body">
-                    Before correcting behavior or asking for participation, begin with connection.
-                    A careful phrase can lower shame, protect dignity, and keep communication open.
-                </div>
-            </div>
-            """,
-            unsafe_allow_html=True,
-        )
-    else:
-        st.markdown(
-            """
-            <div class="principle-box">
-                <div class="principle-title">💬 まずつながり、そのあと支援</div>
-                <div class="principle-body">
-                    行動を正したり参加を求めたりする前に、まず関係性を大切にします。
-                    やわらかな声かけは、恥ずかしさを和らげ、生徒の尊厳を守り、対話を開きます。
-                </div>
-            </div>
-            """,
-            unsafe_allow_html=True,
-        )
-
     level = st.selectbox(
         t["select_level"],
         LEVELS,
