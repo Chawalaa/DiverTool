@@ -17,38 +17,14 @@ def autoplay_video(video_path):
             playsinline
             style="
                 width:100%;
-                max-height:380px;
+                max-height:360px;
                 object-fit:cover;
-                border-radius:20px;
-                box-shadow:0 6px 20px rgba(0,0,0,.08);
-                margin-bottom:20px;
+                border-radius:24px;
+                box-shadow:0 8px 26px rgba(0,0,0,0.08);
+                margin-bottom:24px;
             ">
             <source src="data:video/mp4;base64,{video_base64}" type="video/mp4">
         </video>
-        """,
-        unsafe_allow_html=True,
-    )
-
-
-def hero_box(title):
-    st.markdown(
-        f"""
-        <div style="
-            background:white;
-            border:1px solid #ECECEC;
-            border-radius:22px;
-            padding:30px;
-            margin-bottom:25px;
-            box-shadow:0 8px 24px rgba(0,0,0,.06);
-        ">
-            <h2 style="
-                margin:0;
-                color:#16324F;
-                font-size:1.7rem;
-            ">
-                {title}
-            </h2>
-        </div>
         """,
         unsafe_allow_html=True,
     )
@@ -62,71 +38,195 @@ def render_footer():
         "Designing Culturally Responsive Teacher–Student Communication "
         "for Inclusive Classrooms in Japan"
     )
-
     st.markdown("**Developed by Hope Chawala Banda**")
     st.caption(
         "Developed at the Keio University Graduate School of Media Design (KMD), "
         "PoliPro Laboratory"
     )
-
     st.caption("Master's Research Project • 2026")
     st.caption("© 2026 Hope Chawala Banda. All Rights Reserved.")
 
 
 def render_about_the_research(t, LANG):
 
-    st.title(t["about"])
+    st.markdown(
+        """
+        <style>
+        .page-eyebrow {
+            font-size:0.9rem;
+            font-weight:700;
+            letter-spacing:0.08em;
+            color:#3A78B5;
+            text-transform:uppercase;
+            margin-bottom:0.5rem;
+        }
+
+        .page-title {
+            font-size:2.7rem;
+            font-weight:900;
+            color:#16324F;
+            line-height:1.1;
+            margin-bottom:0.8rem;
+        }
+
+        .page-subtitle {
+            font-size:1.18rem;
+            line-height:1.7;
+            color:#555;
+            max-width:840px;
+            margin-bottom:1.5rem;
+        }
+
+        .research-card {
+            background:#FFFFFF;
+            border:1px solid #ECECEC;
+            border-radius:24px;
+            padding:28px;
+            margin-bottom:22px;
+            box-shadow:0 8px 24px rgba(0,0,0,0.05);
+        }
+
+        .research-card-title {
+            font-size:1.35rem;
+            font-weight:850;
+            color:#16324F;
+            margin-bottom:0.6rem;
+        }
+
+        .research-card-body {
+            font-size:1.05rem;
+            line-height:1.75;
+            color:#555;
+        }
+
+        .principle-item {
+            background:#FFFFFF;
+            border:1px solid #ECECEC;
+            border-radius:18px;
+            padding:18px 20px;
+            margin-bottom:12px;
+            box-shadow:0 4px 14px rgba(0,0,0,0.035);
+            color:#555;
+            line-height:1.6;
+        }
+
+        .section-heading {
+            font-size:1.55rem;
+            font-weight:850;
+            color:#16324F;
+            margin-top:1.6rem;
+            margin-bottom:1rem;
+        }
+        </style>
+        """,
+        unsafe_allow_html=True,
+    )
+
+    if LANG == "en":
+        st.markdown('<div class="page-eyebrow">Research foundation</div>', unsafe_allow_html=True)
+        st.markdown('<div class="page-title">About the Research</div>', unsafe_allow_html=True)
+        st.markdown(
+            """
+            <div class="page-subtitle">
+                DOTS was developed from research on culturally responsive teacher–student
+                communication in Japanese school contexts.
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+    else:
+        st.markdown('<div class="page-eyebrow">研究の基盤</div>', unsafe_allow_html=True)
+        st.markdown('<div class="page-title">研究について</div>', unsafe_allow_html=True)
+        st.markdown(
+            """
+            <div class="page-subtitle">
+                DOTSは、日本の学校における教師と生徒の文化的に配慮した
+                コミュニケーションに関する研究をもとに開発されました。
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
 
     autoplay_video("assets/about_the_research.mp4")
 
-    st.divider()
-
     if LANG == "en":
-        st.markdown(
-            """
-This toolkit was developed as part of a research project exploring culturally responsive communication between teachers and students in Japanese school contexts.
+        cards = [
+            (
+                "Research focus",
+                "This toolkit explores how teachers can notice and communicate about learner needs without creating shame, stigma, or premature labeling.",
+            ),
+            (
+                "Design evidence",
+                "The design draws on classroom observations, teacher interviews, educator surveys, participatory design activities, and expert feedback.",
+            ),
+            (
+                "Communication as support",
+                "Rather than focusing on diagnosis, the research investigates how communication itself can become a form of inclusive classroom support.",
+            ),
+        ]
 
-The design is informed by classroom observations, teacher interviews, educator surveys, participatory design activities, and expert feedback.
+        principles = [
+            "Support teacher–student communication rather than diagnosis.",
+            "Protect learner dignity during every interaction.",
+            "Encourage gentle, practical, and culturally responsive language.",
+            "Make hidden learning and communication needs easier to discuss.",
+            "Offer multiple pathways for classroom participation.",
+            "Use visual metaphors instead of medical or deficit-based imagery.",
+        ]
 
-Rather than focusing on diagnosis, the research investigates how communication itself can become a form of inclusive support—helping teachers notice learner needs and respond with dignity, empathy, and cultural sensitivity.
-"""
-        )
-
-        st.markdown("## Design Principles")
-
-        st.markdown(
-            """
-- Support teacher–student communication rather than diagnosis.
-- Protect learner dignity during every interaction.
-- Encourage gentle, practical, and culturally responsive language.
-- Make hidden learning and communication needs easier to discuss.
-- Offer multiple pathways for classroom participation.
-- Use visual metaphors instead of medical or deficit-based imagery.
-"""
-        )
+        section_title = "Design Principles"
 
     else:
+        cards = [
+            (
+                "研究の焦点",
+                "このツールキットは、教師が恥ずかしさ、偏見、早すぎるラベルづけを生まずに、学習者のニーズに気づき対話する方法を探ります。",
+            ),
+            (
+                "設計の根拠",
+                "設計には、教室観察、教師インタビュー、教育者アンケート、参加型デザイン活動、専門家からのフィードバックが反映されています。",
+            ),
+            (
+                "支援としてのコミュニケーション",
+                "本研究は診断を目的とするのではなく、コミュニケーションそのものがインクルーシブな教室支援になり得ることを探ります。",
+            ),
+        ]
+
+        principles = [
+            "診断ではなく教師と生徒の対話を支える。",
+            "学習者の尊厳を守る。",
+            "やわらかく実践的で文化的に配慮した言葉を使う。",
+            "見えにくい学びやコミュニケーションの困難を話しやすくする。",
+            "複数の参加方法を認める。",
+            "医療的・欠陥ベースの表現ではなく視覚メタファーを用いる。",
+        ]
+
+        section_title = "デザイン原則"
+
+    for title, body in cards:
         st.markdown(
-            """
-このツールキットは、日本の学校における教師と生徒の文化的に配慮したコミュニケーションに関する研究プロジェクトの一環として開発されました。
-
-設計には、教室観察、教師インタビュー、教育者アンケート、参加型デザイン活動、専門家からのフィードバックによって得られた知見が反映されています。
-
-本研究は診断を目的とするものではなく、教師が学習者のニーズに気づき、尊厳・共感・文化的配慮を大切にした対話を実践できるよう支援することを目的としています。
-"""
+            f"""
+            <div class="research-card">
+                <div class="research-card-title">{title}</div>
+                <div class="research-card-body">{body}</div>
+            </div>
+            """,
+            unsafe_allow_html=True,
         )
 
-        st.markdown("## デザイン原則")
+    st.markdown(
+        f'<div class="section-heading">{section_title}</div>',
+        unsafe_allow_html=True,
+    )
 
+    for principle in principles:
         st.markdown(
-            """
-- 診断ではなく教師と生徒の対話を支える。
-- 学習者の尊厳を守る。
-- やわらかく実践的で文化的に配慮した言葉を使う。
-- 見えにくい学びやコミュニケーションの困難を話しやすくする。
-- 複数の参加方法を認める。
-- 医療的・欠陥ベースの表現ではなく視覚メタファーを用いる。
-"""
+            f"""
+            <div class="principle-item">
+                {principle}
+            </div>
+            """,
+            unsafe_allow_html=True,
         )
 
     st.info(t["important_note"])
